@@ -2,7 +2,7 @@ import React from "react";
 
 const InputHeader = () => {
   return (
-    <div className="flex mt-12">
+    <div className="flex">
       <div className="bg-[#ff4655] rounded h-[68px] w-[72px] p-3 mr-4">
         <svg
           data-v-7d44ae36=""
