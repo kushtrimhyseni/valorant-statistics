@@ -9,16 +9,22 @@ export const ValorantApiProvider = ({ children }) => {
   const [tag, setTag] = useState("");
   const [tier, setTier] = useState("");
   const [matches, setMatches] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const playerStatistics = async () => {
     const response = await fetch(
       `https://api.henrikdev.xyz/valorant/v1/account/${input}/${tag}`
     );
     const data = await response.json();
-    setPlayerData(data);
-    playerRank(data.data.puuid);
-    getMatches(data.data.puuid);
-    setError("");
+    if (data.status === 200) {
+      setPlayerData(data);
+      playerRank(data.data.puuid);
+      getMatches(data.data.puuid);
+      setLoading(false);
+    } else {
+      setLoading(true);
+      setError("Player not found");
+    }
   };
 
   const playerRank = async (puuid) => {
@@ -52,6 +58,7 @@ export const ValorantApiProvider = ({ children }) => {
         playerRank,
         getMatches,
         matches,
+        loading,
       }}
     >
       {children}

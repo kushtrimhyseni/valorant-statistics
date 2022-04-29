@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import ValorantApiContext from "../context/ValorantApiContext";
+
 const InputHandler = () => {
   const { playerStatistics, setInput, setTag } = useContext(ValorantApiContext);
+  const clearInput = useRef();
 
   const inputHandler = (input) => {
     const value = input.target.value;
@@ -12,8 +14,7 @@ const InputHandler = () => {
 
   const clickHandler = () => {
     playerStatistics();
-    // playerRank();
-    // getMatches();
+    clearInput.current.value = "";
   };
 
   return (
@@ -30,6 +31,7 @@ const InputHandler = () => {
         </svg>
       </div>
       <input
+        ref={clearInput}
         onKeyUp={inputHandler}
         type="text"
         placeholder="Find an Agent, ie. player#NA1"
