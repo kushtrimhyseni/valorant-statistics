@@ -82,9 +82,6 @@ module.exports = {
         300: "#D1C8FF",
         100: "#F0EDFF",
       },
-      yellow: {
-        900: "#D3A34D",
-      },
     },
     screens: {
       sm: "640px",

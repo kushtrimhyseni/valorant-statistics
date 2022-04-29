@@ -1,11 +1,21 @@
 import React, { useContext } from "react";
 import ValorantApiContext from "../context/ValorantApiContext";
 const InputHandler = () => {
-  const { playerStatistics } = useContext(ValorantApiContext);
+  const { playerStatistics, setInput, setTag } = useContext(ValorantApiContext);
+
+  const inputHandler = (input) => {
+    const value = input.target.value;
+    const seperatedValue = value.split("#");
+    setInput(seperatedValue[0]);
+    setTag(seperatedValue[1]);
+  };
 
   const clickHandler = () => {
     playerStatistics();
+    // playerRank();
+    // getMatches();
   };
+
   return (
     <div className="mt-4 flex">
       <div className="bg-[#1b2733] shadow-md w-[48px] h-[48px] rounded mr-1 p-3">
@@ -20,6 +30,7 @@ const InputHandler = () => {
         </svg>
       </div>
       <input
+        onKeyUp={inputHandler}
         type="text"
         placeholder="Find an Agent, ie. player#NA1"
         className="input w-full max-w-xs bg-[#f1f1f1] border-t-2"

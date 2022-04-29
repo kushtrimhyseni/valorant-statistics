@@ -1,21 +1,23 @@
-import InputHandler from "./components/input/InputHandler";
 import InputHeader from "./components/input/InputHeader";
 import { ValorantApiProvider } from "./components/context/ValorantApiContext";
+import PersonalStats from "./components/PersonalStats";
+import InputHandler from "./components/input/InputHandler";
 function App() {
   return (
     <>
-      <header className="background">
-        <ValorantApiProvider>
+      <ValorantApiProvider>
+        <header className="background">
           <div className="container mx-auto pt-12">
             <InputHeader />
             <InputHandler />
-
-            {/* {playerData?.map((player) => {
-            return <span>{player.metadata.map}</span>;
-          })} */}
           </div>
-        </ValorantApiProvider>
-      </header>
+        </header>
+        <main className="mt-12">
+          <div>
+            <PersonalStats />
+          </div>
+        </main>
+      </ValorantApiProvider>
     </>
   );
 }
