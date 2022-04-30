@@ -7,7 +7,7 @@ function App() {
     <>
       <ValorantApiProvider>
         <header className="background">
-          <div className="container mx-auto pt-12 p-6 lg:p-0">
+          <div className="container mx-auto pt-12 p-6">
             <InputHeader />
             <InputHandler />
           </div>

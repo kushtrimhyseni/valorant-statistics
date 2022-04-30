@@ -69,7 +69,8 @@ module.exports = {
       blue: {
         900: "#165AF8",
         700: "#4D80F7",
-        500: "#7BA0F5",
+        600: "#6366f1",
+        500: "#00554d",
         400: "#4664e5",
         300: "#CFDEFF",
         200: "#331a9c",
@@ -80,6 +81,7 @@ module.exports = {
         700: "#7868CA",
         500: "#A699EB",
         300: "#D1C8FF",
+        200: "#52222f",
         100: "#F0EDFF",
       },
     },
@@ -103,6 +105,9 @@ module.exports = {
       backgroundImage: {
         "split-black-darkblue":
           "linear-gradient(95deg,#17182F -36.26%,#616289 135.23%);",
+        "team-a": "linear-gradient(90deg, #0054d4d ,transparent 40%);",
+        "hero-pattern":
+          "linear-gradient(to right bottom, rgba('#7ed56f',0.8), rgba('#28b485',0.8))",
       },
       boxShadow: {
         custom: "0 1px 8px 0 rgb(0 0 0 / 10%)",
@@ -127,6 +132,7 @@ module.exports = {
       },
       fontFamily: {
         rajdhani: ["Rajdhani", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
       },
     },
   },

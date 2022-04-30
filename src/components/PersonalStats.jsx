@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import ValorantApiContext from "./context/ValorantApiContext";
+import Matches from "./Matches";
 import Spinner from "./Spiner";
 const PersonalStats = () => {
   const { playerData, tier, loading, error } = useContext(ValorantApiContext);
@@ -12,17 +13,17 @@ const PersonalStats = () => {
             {error}
           </div>
         ) : (
-          <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-2 mb-8">
+          <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 lg:gap-2 mb-8">
             {playerData.data && (
-              <div className="card card-side shadow-xl h-[375px] col-span-1">
+              <div className="card card-side shadow-xl flex flex-col md:flex-row h-full md:h-[375px] col-span-1">
                 <figure>
                   <img
                     src={playerData.data.card.large}
                     alt="PlayerCard"
-                    className="w-[200px] h-full object-top"
+                    className="w-full md:w-[200px] h-[350px] object-center md:h-full lg:object-top"
                   />
                 </figure>
-                <div className="card-body">
+                <div className="card-body w-full h-full">
                   <h2 className="card-title">
                     {playerData.data.name}#{playerData.data.tag}
                   </h2>
@@ -65,7 +66,9 @@ const PersonalStats = () => {
               </div>
             )}
 
-            <div className="col-span-2">TABELA</div>
+            <div className="col-span-2">
+              <Matches />
+            </div>
           </div>
         )}
       </>
