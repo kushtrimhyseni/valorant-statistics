@@ -10,7 +10,7 @@ export const ValorantApiProvider = ({ children }) => {
   const [tier, setTier] = useState("");
   const [matches, setMatches] = useState("");
   const [loading, setLoading] = useState(false);
-
+  // const [news, setNews] = useState({});
   const playerStatistics = async () => {
     const response = await fetch(
       `https://api.henrikdev.xyz/valorant/v1/account/${input}/${tag}`
@@ -22,8 +22,8 @@ export const ValorantApiProvider = ({ children }) => {
       getMatches(data.data.puuid);
       setLoading(false);
     } else {
-      setLoading(true);
       setError("Player not found");
+      setLoading();
     }
   };
 
@@ -45,6 +45,25 @@ export const ValorantApiProvider = ({ children }) => {
     setError("");
   };
 
+  // useEffect(() => {
+  //   getArticles();
+  // }, []);
+
+  // const getArticles = async () => {
+  //   const response = await fetch(
+  //     "https://api.henrikdev.xyz/valorant/v1/website/en-us"
+  //   );
+  //   const data = await response.json();
+  //   if (data.status === 200) {
+  //     setNews(data.data);
+  //     setLoading(false);
+  //     setError("");
+  //   } else {
+  //     setError("Problem fetching articles please try again !");
+  //     setLoading();
+  //   }
+  // };
+
   return (
     <ValorantApiContext.Provider
       value={{
@@ -59,6 +78,7 @@ export const ValorantApiProvider = ({ children }) => {
         getMatches,
         matches,
         loading,
+        // news,
       }}
     >
       {children}

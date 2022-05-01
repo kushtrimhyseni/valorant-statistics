@@ -2,6 +2,8 @@ import InputHeader from "./components/input/InputHeader";
 import { ValorantApiProvider } from "./components/context/ValorantApiContext";
 import PersonalStats from "./components/PersonalStats";
 import InputHandler from "./components/input/InputHandler";
+// import News from "./components/News";
+
 function App() {
   return (
     <>
@@ -13,8 +15,9 @@ function App() {
           </div>
         </header>
         <main className="mt-12 p-6 lg:p-0">
-          <div>
+          <div className="flex flex-col">
             <PersonalStats />
+            {/* <News /> */}
           </div>
         </main>
       </ValorantApiProvider>
