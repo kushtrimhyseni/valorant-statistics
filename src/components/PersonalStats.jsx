@@ -20,7 +20,7 @@ const PersonalStats = () => {
                   <img
                     src={playerData.data.card.large}
                     alt="PlayerCard"
-                    className="w-full md:w-[200px] h-[350px] object-center md:h-full lg:object-top"
+                    className="w-full md:w-[150px] h-[350px] object-center md:h-full lg:object-top"
                   />
                 </figure>
                 <div className="card-body w-full h-full">
