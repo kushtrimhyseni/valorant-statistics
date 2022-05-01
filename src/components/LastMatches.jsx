@@ -21,7 +21,7 @@ const LastMatches = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-col-3 lg:grid-cols-5 bg-[#1b2733]">
+      <div className="grid grid-cols-1 md:grid-col-3 lg:grid-cols-5 bg-[#1b2733]">
         {matches.data?.map((match) => {
           const date = match.metadata.game_start_patched.split("2022");
           return (
@@ -36,7 +36,7 @@ const LastMatches = () => {
                 <span className="text-rajdhani text-md font-bold">
                   {date[0]}
                 </span>
-                <div className="font-roboto text-xl">
+                <div className="font-roboto text-xl mt-2">
                   <span
                     className={`font-roboto font-bold text-xl ${
                       match.teams.blue.has_won
@@ -70,77 +70,85 @@ const LastMatches = () => {
           searchedPlayer[0].stats.kills / searchedPlayer[0].stats.deaths
         ).toFixed(2);
         return (
-          <div className="grid grid-cols-1 gap-2 mt-4 border border-[#1b2733] cursor-pointer shadow-lg">
-            <div className="h-[100px] bg-[#0f1923] p-4 grid grid-cols-7 place-items-center">
-              <img
-                className="w-10 h-10"
-                src={searchedPlayer[0].assets?.agent.small}
-                alt=""
-              />
-              <div className="flex flex-col">
-                <span className="font-rajdhani font-bold text-2xl text-white-900">
-                  {match.metadata.map}
-                </span>
-                <span>{match.metadata.mode}</span>
+          <div
+            className={`grid grid-cols-1 gap-2 mt-4 cursor-pointer shadow-lg border-l-2 ${
+              match.teams.blue.has_won ? "border-[#16e5b4]" : "border-[#ef5351]"
+            }`}
+          >
+            <div className="h-full md:h-[100px] bg-[#0f1923] p-4 grid grid-cols-1 md:grid-cols-2 place-items-center">
+              <div className="flex w-full justify-around items-center">
+                <img
+                  className="w-10 h-10"
+                  src={searchedPlayer[0].assets?.agent.small}
+                  alt=""
+                />
+                <div className="flex flex-col ml-4">
+                  <span className="font-rajdhani font-bold text-2xl text-white-900">
+                    {match.metadata.map}
+                  </span>
+                  <span>{match.metadata.mode}</span>
+                </div>
+                <img
+                  className="w-10 h-10"
+                  src={`assets/ranks/${searchedPlayer[0].currenttier_patched}.webp`}
+                  alt=""
+                />
               </div>
-              <img
-                className="w-10 h-10"
-                src={`assets/ranks/${searchedPlayer[0].currenttier_patched}.webp`}
-                alt=""
-              />
-              <div className="flex flex-col justify-center items-center">
-                <div className="flex">
-                  <span
-                    className={`font-roboto font-bold text-xl ${
-                      match.teams.blue.has_won
-                        ? "text-white-900"
-                        : "text-[#ef5351]"
-                    }`}
-                  >
-                    {match.teams.blue.rounds_won} :{" "}
+              <div className="flex justify-around w-full items-center mt-6 md:mt-0">
+                <div className="flex flex-col justify-center items-center">
+                  <div className="flex">
                     <span
                       className={`font-roboto font-bold text-xl ${
-                        match.teams.red.has_won
+                        match.teams.blue.has_won
                           ? "text-white-900"
-                          : "text-red-700"
+                          : "text-[#ef5351]"
                       }`}
                     >
-                      {" "}
-                      {match.teams.red.rounds_won}
-                    </span>{" "}
+                      {match.teams.blue.rounds_won} :{" "}
+                      <span
+                        className={`font-roboto font-bold text-xl ${
+                          match.teams.red.has_won
+                            ? "text-white-900"
+                            : "text-red-700"
+                        }`}
+                      >
+                        {" "}
+                        {match.teams.red.rounds_won}
+                      </span>{" "}
+                    </span>
+                  </div>
+                  {/* <span>MVP</span> */}
+                </div>
+                <div className="flex flex-col">
+                  <span className="flex justify-end items-end text-sm text-[#99abbf] font-roboto font-bold">
+                    K/D/A
+                  </span>
+                  <span className="text-xl font-roboto font-bold text-white-900">
+                    {searchedPlayer[0].stats.kills}/
+                    {searchedPlayer[0].stats.deaths}/
+                    {searchedPlayer[0].stats.assists}
                   </span>
                 </div>
-                <span>MVP</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="flex justify-end items-end text-sm text-[#99abbf] font-roboto font-bold">
-                  K/D/A
-                </span>
-                <span className="text-xl font-roboto font-bold text-white-900">
-                  {searchedPlayer[0].stats.kills}/
-                  {searchedPlayer[0].stats.deaths}/
-                  {searchedPlayer[0].stats.assists}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="flex justify-center items-center text-sm text-[#99abbf] font-roboto font-bold">
-                  K/D
-                </span>
-                <span
-                  className={`text-xl font-roboto font-bold ${
-                    killDeathRatio > 1 ? "text-[#16e5b4]" : "text-[#ef5351]"
-                  }`}
-                >
-                  {killDeathRatio}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-sm text-[#99abbf] font-roboto font-bold">
-                  HS
-                </span>
-                <span className="text-xl font-roboto font-bold text-white-900">
-                  {searchedPlayer[0].stats.headshots}
-                </span>
+                <div className="flex flex-col">
+                  <span className="flex justify-center items-center text-sm text-[#99abbf] font-roboto font-bold">
+                    K/D
+                  </span>
+                  <span
+                    className={`text-xl font-roboto font-bold ${
+                      killDeathRatio > 1 ? "text-[#16e5b4]" : "text-[#ef5351]"
+                    }`}
+                  >
+                    {killDeathRatio}
+                  </span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm text-[#99abbf] font-roboto font-bold">
+                    HS
+                  </span>
+                  <span className="text-xl font-roboto font-bold text-white-900 text-center">
+                    {searchedPlayer[0].stats.headshots}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
