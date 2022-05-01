@@ -28,8 +28,8 @@ const SingleMatch = () => {
         </Link>
       </header>
       <div className="container mx-auto mt-4 grid grid-cols-1 lg:grid-cols-3 lg:gap-2 mb-8">
-        <div className="col-span-1">STUFF HERE</div>
-        <div className="flex flex-col mb-8 mt-4 lg:mt-0 col-span-2">
+        <div className="col-span-1 p-6 lg:p-0">STUFF HERE</div>
+        <div className="flex flex-col mb-8 lg:mt-0 col-span-2 p-6 lg:p-0">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center bg-[#1b2733] shadow-lg rounded-lg p-6 mb-4">
             <span className="text-[#ffffff] text-3xl font-rajdhani font-bold">
               Map: {match.metadata?.map}
@@ -41,7 +41,7 @@ const SingleMatch = () => {
               Server: {match.metadata?.cluster}
             </span>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col col-span-2">
             <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
               <div className="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
                 <table className="min-w-full">
