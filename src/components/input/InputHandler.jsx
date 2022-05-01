@@ -14,7 +14,7 @@ const InputHandler = () => {
   };
 
   const clickHandler = () => {
-    if (input === "") {
+    if (input === " ") {
       alert("User field cannot be empty!");
     } else {
       playerStatistics();
@@ -45,7 +45,7 @@ const InputHandler = () => {
       </div>
       <input
         ref={clearInput}
-        onKeyDown={inputHandler}
+        onKeyUp={inputHandler}
         type="text"
         placeholder="Find an Agent, ie. player#NA1"
         className="input w-full max-w-xs bg-[#f1f1f1] border-t-2"
