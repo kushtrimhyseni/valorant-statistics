@@ -2,7 +2,8 @@ import React, { useContext, useRef } from "react";
 import ValorantApiContext from "../context/ValorantApiContext";
 
 const InputHandler = () => {
-  const { playerStatistics, setInput, setTag } = useContext(ValorantApiContext);
+  const { playerStatistics, setInput, setTag, input } =
+    useContext(ValorantApiContext);
   const clearInput = useRef();
 
   const inputHandler = (input) => {
@@ -13,10 +14,22 @@ const InputHandler = () => {
   };
 
   const clickHandler = () => {
-    playerStatistics();
-    clearInput.current.value = "";
+    if (input === "") {
+      alert("User field cannot be empty!");
+    } else {
+      playerStatistics();
+      clearInput.current.value = "";
+    }
   };
 
+  // const handleKeyPress = (event) => {
+  //   if (event.keyCode === 13 && input === " ") {
+  //     alert("User field cannot be empty!");
+  //   } else {
+  //     playerStatistics();
+  //     clearInput.current.value = "";
+  //   }
+  // };
   return (
     <div className="mt-4 flex">
       <div className="bg-[#1b2733] shadow-md w-[48px] h-[48px] rounded mr-1 p-3">
@@ -32,7 +45,7 @@ const InputHandler = () => {
       </div>
       <input
         ref={clearInput}
-        onKeyUp={inputHandler}
+        onKeyDown={inputHandler}
         type="text"
         placeholder="Find an Agent, ie. player#NA1"
         className="input w-full max-w-xs bg-[#f1f1f1] border-t-2"
