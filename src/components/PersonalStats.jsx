@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ValorantApiContext from "./context/ValorantApiContext";
-import Matches from "./Matches";
+import LastMatches from "./LastMatches";
 import Spinner from "./Spiner";
 const PersonalStats = () => {
   const { playerData, tier, loading, error } = useContext(ValorantApiContext);
@@ -67,7 +67,7 @@ const PersonalStats = () => {
             )}
 
             <div className="col-span-2">
-              <Matches />
+              <LastMatches />
             </div>
           </div>
         )}

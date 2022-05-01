@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ValorantApiContext from "./context/ValorantApiContext";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 const LastMatches = () => {
   const { matches, playerData, input } = useContext(ValorantApiContext);
 
@@ -36,7 +36,7 @@ const LastMatches = () => {
                     : "bg-gradient-to-r from-purple-200"
                 }`}
               >
-                <span className="text-rajdhani text-md font-bold">
+                <span className="text-rajdhani text-md font-bold text-center">
                   {date[0]}
                 </span>
                 <div className="font-roboto text-xl mt-2">
@@ -65,7 +65,7 @@ const LastMatches = () => {
           );
         })}
       </div>
-      {matches.data?.map((match) => {
+      {matches?.data?.map((match) => {
         const searchedPlayer = match.players.all_players.filter(
           (player) => player.name === input
         );
@@ -73,94 +73,98 @@ const LastMatches = () => {
           searchedPlayer[0].stats.kills / searchedPlayer[0].stats.deaths
         ).toFixed(2);
         return (
-          <div
-            className={`flex w-full flew-wrap mt-4 cursor-pointer shadow-lg border-l-2 ${
-              match.teams.blue.has_won ? "border-[#16e5b4]" : "border-[#ef5351]"
-            }`}
-          >
+          <Link to={`/match/${match.metadata.matchid}`}>
             <div
-              className={`h-full w-full lg:h-[100px] bg-[#0f1923] ${
+              className={`flex w-full flew-wrap mt-4 cursor-pointer shadow-lg border-l-2 ${
                 match.teams.blue.has_won
-                  ? "bg-gradient-to-r from-blue-500"
-                  : "bg-gradient-to-r from-purple-200"
-              } p-4 flex flex-col md:flex-row`}
+                  ? "border-[#16e5b4]"
+                  : "border-[#ef5351]"
+              }`}
             >
-              <div className="flex w-full lg:max-w-[320px] justify-around md:justify-between items-center ml-0 md:ml-4">
-                <img
-                  className="w-10 h-10"
-                  src={searchedPlayer[0].assets?.agent.small}
-                  alt=""
-                />
-                <div className="flex flex-col items-center lg:items-start ml-0 lg:ml-4">
-                  <span className="font-rajdhani font-bold text-2xl text-white-900">
-                    {match.metadata.map}
-                  </span>
-                  <span>{match.metadata.mode}</span>
+              <div
+                className={`h-full w-full lg:h-[100px] bg-[#0f1923] ${
+                  match.teams.blue.has_won
+                    ? "bg-gradient-to-r from-blue-500"
+                    : "bg-gradient-to-r from-purple-200"
+                } p-4 flex flex-col md:flex-row`}
+              >
+                <div className="flex w-full lg:max-w-[320px] justify-around md:justify-between items-center ml-0 md:ml-4">
+                  <img
+                    className="w-10 h-10"
+                    src={searchedPlayer[0].assets?.agent.small}
+                    alt=""
+                  />
+                  <div className="flex flex-col items-center lg:items-start ml-0 lg:ml-4">
+                    <span className="font-rajdhani font-bold text-2xl text-white-900">
+                      {match.metadata.map}
+                    </span>
+                    <span>{match.metadata.mode}</span>
+                  </div>
+                  <img
+                    className="w-10 h-10"
+                    src={`assets/ranks/${searchedPlayer[0].currenttier_patched}.webp`}
+                    alt=""
+                  />
                 </div>
-                <img
-                  className="w-10 h-10"
-                  src={`assets/ranks/${searchedPlayer[0].currenttier_patched}.webp`}
-                  alt=""
-                />
-              </div>
-              <div className="flex justify-around w-full items-center ml-0 md:ml-6 mt-6 md:mt-0">
-                <div className="flex flex-col justify-center items-center">
-                  <div className="flex">
-                    <span
-                      className={`font-roboto font-bold text-xl ${
-                        match.teams.blue.has_won
-                          ? "text-white-900"
-                          : "text-[#ef5351]"
-                      }`}
-                    >
-                      {match.teams.blue.rounds_won} :{" "}
+                <div className="flex justify-around w-full items-center ml-0 md:ml-6 mt-6 md:mt-0">
+                  <div className="flex flex-col justify-center items-center">
+                    <div className="flex">
                       <span
                         className={`font-roboto font-bold text-xl ${
-                          match.teams.red.has_won
+                          match.teams.blue.has_won
                             ? "text-white-900"
-                            : "text-red-700"
+                            : "text-[#ef5351]"
                         }`}
                       >
-                        {" "}
-                        {match.teams.red.rounds_won}
-                      </span>{" "}
+                        {match.teams.blue.rounds_won} :{" "}
+                        <span
+                          className={`font-roboto font-bold text-xl ${
+                            match.teams.red.has_won
+                              ? "text-white-900"
+                              : "text-red-700"
+                          }`}
+                        >
+                          {" "}
+                          {match.teams.red.rounds_won}
+                        </span>{" "}
+                      </span>
+                    </div>
+                    {/* <span>MVP</span> */}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="flex justify-end items-end text-sm text-[#99abbf] font-roboto font-bold">
+                      K/D/A
+                    </span>
+                    <span className="text-xl font-roboto font-bold text-white-900">
+                      {searchedPlayer[0].stats.kills}/
+                      {searchedPlayer[0].stats.deaths}/
+                      {searchedPlayer[0].stats.assists}
                     </span>
                   </div>
-                  {/* <span>MVP</span> */}
-                </div>
-                <div className="flex flex-col">
-                  <span className="flex justify-end items-end text-sm text-[#99abbf] font-roboto font-bold">
-                    K/D/A
-                  </span>
-                  <span className="text-xl font-roboto font-bold text-white-900">
-                    {searchedPlayer[0].stats.kills}/
-                    {searchedPlayer[0].stats.deaths}/
-                    {searchedPlayer[0].stats.assists}
-                  </span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="flex justify-center items-center text-sm text-[#99abbf] font-roboto font-bold">
-                    K/D
-                  </span>
-                  <span
-                    className={`text-xl font-roboto font-bold ${
-                      killDeathRatio > 1 ? "text-[#16e5b4]" : "text-[#ef5351]"
-                    }`}
-                  >
-                    {killDeathRatio}
-                  </span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-sm text-[#99abbf] font-roboto font-bold">
-                    HS
-                  </span>
-                  <span className="text-xl font-roboto font-bold text-white-900 text-center">
-                    {searchedPlayer[0].stats.headshots}
-                  </span>
+                  <div className="flex flex-col">
+                    <span className="flex justify-center items-center text-sm text-[#99abbf] font-roboto font-bold">
+                      K/D
+                    </span>
+                    <span
+                      className={`text-xl font-roboto font-bold ${
+                        killDeathRatio > 1 ? "text-[#16e5b4]" : "text-[#ef5351]"
+                      }`}
+                    >
+                      {killDeathRatio}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm text-[#99abbf] font-roboto font-bold">
+                      HS
+                    </span>
+                    <span className="text-xl font-roboto font-bold text-white-900 text-center">
+                      {searchedPlayer[0].stats.headshots}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>
