@@ -104,7 +104,7 @@ const SingleMatch = () => {
                             <div className="flex justify-center items-center">
                               <img
                                 className="w-10 h-10 rounded-full"
-                                src={`../assets/ranks/${allplayers.currenttier_patched}.webp`}
+                                src={`/assets/ranks/${allplayers.currenttier_patched}.webp`}
                                 alt="admin dashboard ui"
                               />
                             </div>
@@ -212,7 +212,7 @@ const SingleMatch = () => {
                             <div className="flex justify-center items-center">
                               <img
                                 className="w-10 h-10 rounded-full"
-                                src={`../assets/ranks/${allplayers.currenttier_patched}.webp`}
+                                src={`/assets/ranks/${allplayers.currenttier_patched}.webp`}
                                 alt="admin dashboard ui"
                               />
                             </div>

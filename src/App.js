@@ -11,7 +11,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Home />}></Route>
-            <Route path="/match/:id" element={<SingleMatch />}></Route>
+            <Route path="/match/:id/:user" element={<SingleMatch />}></Route>
           </Routes>
         </Router>
       </ValorantApiProvider>

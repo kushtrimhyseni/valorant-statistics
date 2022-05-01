@@ -73,7 +73,7 @@ const LastMatches = () => {
           searchedPlayer[0].stats.kills / searchedPlayer[0].stats.deaths
         ).toFixed(2);
         return (
-          <Link to={`/match/${match.metadata.matchid}`}>
+          <Link to={`/match/${match.metadata.matchid}/${input}`}>
             <div
               className={`flex w-full flew-wrap mt-4 cursor-pointer shadow-lg border-l-2 ${
                 match.teams.blue.has_won
