@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import ValorantApiContext from "./context/ValorantApiContext";
+// import { Link } from "react-router-dom";
 const LastMatches = () => {
   const { matches, playerData, input } = useContext(ValorantApiContext);
 
@@ -75,8 +76,14 @@ const LastMatches = () => {
               match.teams.blue.has_won ? "border-[#16e5b4]" : "border-[#ef5351]"
             }`}
           >
-            <div className="h-full md:h-[100px] bg-[#0f1923] p-4 grid grid-cols-1 md:grid-cols-2 place-items-center">
-              <div className="flex w-full justify-around items-center">
+            <div
+              className={`h-full md:h-[100px] bg-[#0f1923] ${
+                match.teams.blue.has_won
+                  ? "bg-gradient-to-r from-blue-500"
+                  : "bg-gradient-to-r from-purple-200"
+              } p-4 flex flex-col md:flex-row`}
+            >
+              <div className="flex w-full md:max-w-[320px] justify-between items-center ml-0 md:ml-4">
                 <img
                   className="w-10 h-10"
                   src={searchedPlayer[0].assets?.agent.small}
@@ -94,7 +101,7 @@ const LastMatches = () => {
                   alt=""
                 />
               </div>
-              <div className="flex justify-around w-full items-center mt-6 md:mt-0">
+              <div className="flex justify-around w-full items-center ml-0 md:ml-6 mt-6 md:mt-0">
                 <div className="flex flex-col justify-center items-center">
                   <div className="flex">
                     <span

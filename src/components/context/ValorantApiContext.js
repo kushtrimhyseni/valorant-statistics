@@ -32,8 +32,14 @@ export const ValorantApiProvider = ({ children }) => {
       `https://api.henrikdev.xyz/valorant/v1/by-puuid/mmr/eu/${puuid}`
     );
     const data = await response.json();
-    setTier(data);
-    setError("");
+    if (data.status === 200) {
+      setTier(data);
+      setLoading(false);
+      setError("");
+    } else {
+      setError("Player not found");
+      setLoading();
+    }
   };
 
   const getMatches = async (puuid) => {
