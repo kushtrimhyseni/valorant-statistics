@@ -3,7 +3,7 @@ import ValorantApiContext from "./context/ValorantApiContext";
 import { Link } from "react-router-dom";
 const LastMatches = () => {
   const { matches, playerData, input } = useContext(ValorantApiContext);
-
+  let id = 0;
   return (
     <div
       className={`flex-col mb-4 mt-4 lg:mt-0 ${matches ? "flex" : "hidden"}`}
@@ -26,6 +26,7 @@ const LastMatches = () => {
 
       <div className="grid grid-cols-1 md:grid-col-3 lg:grid-cols-5 bg-[#1b2733]">
         {matches.data?.map((match) => {
+          id++;
           const searchedPlayer = match.players.all_players.find(
             (player) => player.name === input
           );
@@ -39,6 +40,7 @@ const LastMatches = () => {
                     ? "bg-gradient-to-r from-green-200"
                     : "bg-gradient-to-r from-purple-200"
                 }`}
+                key={id}
               >
                 <span className="text-rajdhani text-md font-bold text-center">
                   {date[0]}

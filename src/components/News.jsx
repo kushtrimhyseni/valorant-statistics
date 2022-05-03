@@ -2,16 +2,16 @@ import React, { useContext } from "react";
 import ValorantApiContext from "./context/ValorantApiContext";
 const News = () => {
   const { news, playerData } = useContext(ValorantApiContext);
-
   let id = 0;
   return (
     <>
       <div
-        className={`${
-          playerData ? "block" : "hidden"
-        } bg-gradient-to-r from-purple-200 flex justify-around items-center flex-wrap mx-auto`}
+        className={`bg-gradient-to-r from-purple-200 flex justify-around items-center flex-wrap mx-auto ${
+          playerData.data ? "hidden" : "flex"
+        }`}
       >
         {news?.slice(0, 3).map((article) => {
+          const date = article.date.split("T");
           id++;
           return (
             <div
@@ -42,7 +42,7 @@ const News = () => {
                     </a>
                     <div className="mt-4">
                       <span className="text-teal-600 text-md font-semibold">
-                        {article.date.toLocaleString()}
+                        {date[0]}
                       </span>
                     </div>
                   </div>

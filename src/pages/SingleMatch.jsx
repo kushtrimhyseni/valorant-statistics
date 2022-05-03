@@ -17,6 +17,8 @@ const SingleMatch = () => {
     const data = await response.json();
     setMatch(data.data);
   };
+
+  let ids = 0;
   return (
     <>
       <header className="background grid grid-cols-1 md:grid-cols-2 place-items-center p-6">
@@ -87,10 +89,11 @@ const SingleMatch = () => {
 
                   <tbody className="bg-gradient-to-r from-blue-500">
                     {match.players?.blue?.map((allplayers) => {
+                      ids++;
                       const kd =
                         allplayers.stats.kills - allplayers.stats.deaths;
                       return (
-                        <tr>
+                        <tr key={ids}>
                           <td className="px-6 py-4 whitespace-no-wrap border-b text-center border-gray-200">
                             <div className="flex items-center">
                               <div className="flex-shrink-0 w-10 h-10">
