@@ -1,9 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useRef, useState } from "react";
 import ValorantApiContext from "../context/ValorantApiContext";
 
 const InputHandler = () => {
-  const [clear, setClear] = useState([]);
+  const [setClear] = useState([]);
 
   const { playerStatistics, setInput, setTag, input, playerData } =
     useContext(ValorantApiContext);
