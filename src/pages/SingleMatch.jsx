@@ -1,14 +1,51 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, Link, useSearchParams } from "react-router-dom";
 import InputHeader from "../components/input/InputHeader";
+import ValorantApiContext from "../components/context/ValorantApiContext";
+
 const SingleMatch = () => {
+  const { matches } = useContext(ValorantApiContext);
+  const [agent, setAgent] = useState("");
+  const [searchParams] = useSearchParams();
   const { id } = useParams();
   const [match, setMatch] = useState([]);
 
+  const getFavAgent = (matches) => {
+    if (!matches) return;
+    const agentOccurrences = {};
+
+    matches.forEach((match) => {
+      const matchPlayer = match.players.all_players.find((matchPlayer) => {
+        return (
+          matchPlayer.name === searchParams.get("user") &&
+          matchPlayer.tag === searchParams.get("tag")
+        );
+      });
+
+      if (agentOccurrences.hasOwnProperty(matchPlayer.character)) {
+        agentOccurrences[matchPlayer.character]++;
+      } else {
+        agentOccurrences[matchPlayer.character] = 1;
+      }
+
+      let bestAgent = null;
+
+      Object.keys(agentOccurrences).forEach((character) => {
+        if (!bestAgent || agentOccurrences[character] > bestAgent.count) {
+          bestAgent = { name: character, count: agentOccurrences[character] };
+        }
+      });
+      setAgent(bestAgent.name);
+    });
+  };
+
   useEffect(() => {
     getSingleMatch();
-  }, []);
+    if (matches) {
+      getFavAgent(matches.data);
+    }
+  }, [matches]);
 
   const getSingleMatch = async () => {
     const response = await fetch(
@@ -38,7 +75,9 @@ const SingleMatch = () => {
         </Link>
       </header>
       <div className="container mx-auto mt-4 grid grid-cols-1 lg:grid-cols-3 lg:gap-2 mb-8">
-        <div className="col-span-1 p-6 lg:p-0">STUFF HERE</div>
+        <div className="col-span-1 p-6 lg:p-0">
+          Favorite Agent Last 5 Matches: {agent}
+        </div>
         <div className="flex flex-col mb-8 lg:mt-0 col-span-2 p-6 lg:p-0">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center bg-[#1b2733] shadow-lg rounded-lg p-6 mb-4">
             <span className="text-[#ffffff] text-3xl font-rajdhani font-bold">

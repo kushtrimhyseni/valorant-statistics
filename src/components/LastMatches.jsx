@@ -31,7 +31,6 @@ const LastMatches = () => {
             (player) => player.name === input
           );
           const date = match.metadata.game_start_patched.split("2022");
-
           return (
             <>
               <div
@@ -79,7 +78,9 @@ const LastMatches = () => {
           searchedPlayer.stats.kills / searchedPlayer.stats.deaths
         ).toFixed(2);
         return (
-          <Link to={`/match/${match.metadata.matchid}/${input}`}>
+          <Link
+            to={`/match/${match.metadata.matchid}/?user=${searchedPlayer.name}&tag=${searchedPlayer.tag}`}
+          >
             <div
               className={`flex w-full flew-wrap mt-4 cursor-pointer shadow-lg border-l-2 ${
                 match.teams[searchedPlayer.team.toLowerCase()].has_won
