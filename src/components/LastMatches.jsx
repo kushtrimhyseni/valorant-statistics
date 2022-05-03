@@ -26,12 +26,16 @@ const LastMatches = () => {
 
       <div className="grid grid-cols-1 md:grid-col-3 lg:grid-cols-5 bg-[#1b2733]">
         {matches.data?.map((match) => {
+          const searchedPlayer = match.players.all_players.find(
+            (player) => player.name === input
+          );
           const date = match.metadata.game_start_patched.split("2022");
+
           return (
             <>
               <div
                 className={`flex flex-col justify-center items-center  w-full h-[100px] ${
-                  match.teams.blue.has_won
+                  match.teams[searchedPlayer.team.toLowerCase()].has_won
                     ? "bg-gradient-to-r from-green-200"
                     : "bg-gradient-to-r from-purple-200"
                 }`}
@@ -42,7 +46,7 @@ const LastMatches = () => {
                 <div className="font-roboto text-xl mt-2">
                   <span
                     className={`font-roboto font-bold text-xl ${
-                      match.teams.blue.has_won
+                      match.teams[searchedPlayer.team.toLowerCase()].has_won
                         ? "text-white-900"
                         : "text-[#ef5351]"
                     }`}
@@ -52,7 +56,7 @@ const LastMatches = () => {
                   :{" "}
                   <span
                     className={`font-roboto font-bold text-xl ${
-                      match.teams.red.has_won
+                      match.teams[searchedPlayer.team.toLowerCase()].has_won
                         ? "text-white-900"
                         : "text-red-700"
                     }`}
@@ -66,24 +70,24 @@ const LastMatches = () => {
         })}
       </div>
       {matches?.data?.map((match) => {
-        const searchedPlayer = match.players.all_players.filter(
+        const searchedPlayer = match.players.all_players.find(
           (player) => player.name === input
         );
         const killDeathRatio = (
-          searchedPlayer[0].stats.kills / searchedPlayer[0].stats.deaths
+          searchedPlayer.stats.kills / searchedPlayer.stats.deaths
         ).toFixed(2);
         return (
           <Link to={`/match/${match.metadata.matchid}/${input}`}>
             <div
               className={`flex w-full flew-wrap mt-4 cursor-pointer shadow-lg border-l-2 ${
-                match.teams.blue.has_won
+                match.teams[searchedPlayer.team.toLowerCase()].has_won
                   ? "border-[#16e5b4]"
                   : "border-[#ef5351]"
               }`}
             >
               <div
                 className={`h-full w-full lg:h-[100px] bg-[#0f1923] ${
-                  match.teams.blue.has_won
+                  match.teams[searchedPlayer.team.toLowerCase()].has_won
                     ? "bg-gradient-to-r from-blue-500"
                     : "bg-gradient-to-r from-purple-200"
                 } p-4 flex flex-col md:flex-row`}
@@ -91,7 +95,7 @@ const LastMatches = () => {
                 <div className="flex w-full lg:max-w-[320px] justify-around md:justify-between items-center ml-0 md:ml-4">
                   <img
                     className="w-10 h-10"
-                    src={searchedPlayer[0].assets?.agent.small}
+                    src={searchedPlayer.assets?.agent.small}
                     alt=""
                   />
                   <div className="flex flex-col items-center lg:items-start ml-0 lg:ml-4">
@@ -102,7 +106,7 @@ const LastMatches = () => {
                   </div>
                   <img
                     className="w-10 h-10"
-                    src={`assets/ranks/${searchedPlayer[0].currenttier_patched}.webp`}
+                    src={`assets/ranks/${searchedPlayer.currenttier_patched}.webp`}
                     alt=""
                   />
                 </div>
@@ -136,9 +140,8 @@ const LastMatches = () => {
                       K/D/A
                     </span>
                     <span className="text-xl font-roboto font-bold text-white-900">
-                      {searchedPlayer[0].stats.kills}/
-                      {searchedPlayer[0].stats.deaths}/
-                      {searchedPlayer[0].stats.assists}
+                      {searchedPlayer.stats.kills}/{searchedPlayer.stats.deaths}
+                      /{searchedPlayer.stats.assists}
                     </span>
                   </div>
                   <div className="flex flex-col">
@@ -158,7 +161,7 @@ const LastMatches = () => {
                       HS
                     </span>
                     <span className="text-xl font-roboto font-bold text-white-900 text-center">
-                      {searchedPlayer[0].stats.headshots}
+                      {searchedPlayer.stats.headshots}
                     </span>
                   </div>
                 </div>

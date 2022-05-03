@@ -20,11 +20,19 @@ const SingleMatch = () => {
   return (
     <>
       <header className="background grid grid-cols-1 md:grid-cols-2 place-items-center p-6">
-        <div className="container mx-auto w-full md:w-1/2">
+        <div className="container mx-auto w-full md:w-1/2 white">
           <InputHeader />
         </div>
         <Link to="/" className="w-full md:w-1/2">
-          <div>Back to HOME</div>
+          <div className="back-to-home">
+            <a href="/" className="white">
+              <p>
+                <span className="bg"></span>
+                <span className="base"></span>
+                <span className="text">Home</span>
+              </p>
+            </a>
+          </div>
         </Link>
       </header>
       <div className="container mx-auto mt-4 grid grid-cols-1 lg:grid-cols-3 lg:gap-2 mb-8">

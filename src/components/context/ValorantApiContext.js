@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const ValorantApiContext = createContext();
 
@@ -10,7 +10,8 @@ export const ValorantApiProvider = ({ children }) => {
   const [tier, setTier] = useState("");
   const [matches, setMatches] = useState("");
   const [loading, setLoading] = useState(false);
-  // const [news, setNews] = useState({});
+  const [news, setNews] = useState([]);
+
   const playerStatistics = async () => {
     const response = await fetch(
       `https://api.henrikdev.xyz/valorant/v1/account/${input}/${tag}`
@@ -51,24 +52,24 @@ export const ValorantApiProvider = ({ children }) => {
     setError("");
   };
 
-  // useEffect(() => {
-  //   getArticles();
-  // }, []);
+  useEffect(() => {
+    getArticles();
+  }, []);
 
-  // const getArticles = async () => {
-  //   const response = await fetch(
-  //     "https://api.henrikdev.xyz/valorant/v1/website/en-us"
-  //   );
-  //   const data = await response.json();
-  //   if (data.status === 200) {
-  //     setNews(data.data);
-  //     setLoading(false);
-  //     setError("");
-  //   } else {
-  //     setError("Problem fetching articles please try again !");
-  //     setLoading();
-  //   }
-  // };
+  const getArticles = async () => {
+    const response = await fetch(
+      "https://api.henrikdev.xyz/valorant/v1/website/en-us"
+    );
+    const data = await response.json();
+    if (data.status === 200) {
+      setNews(data.data);
+      setLoading(false);
+      setError("");
+    } else {
+      setError("Problem fetching articles please try again !");
+      setLoading();
+    }
+  };
 
   return (
     <ValorantApiContext.Provider
@@ -84,7 +85,7 @@ export const ValorantApiProvider = ({ children }) => {
         getMatches,
         matches,
         loading,
-        // news,
+        news,
       }}
     >
       {children}

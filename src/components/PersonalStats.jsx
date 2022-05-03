@@ -13,7 +13,7 @@ const PersonalStats = () => {
             {error}
           </div>
         ) : (
-          <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 lg:gap-2 mb-8">
+          <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 lg:gap-2 mb-8 md:mt-12">
             {playerData.data && (
               <div className="card card-side shadow-xl flex flex-col md:flex-row h-full md:h-[375px] col-span-1">
                 <figure>

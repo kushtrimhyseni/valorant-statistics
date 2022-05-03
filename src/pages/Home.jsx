@@ -2,6 +2,7 @@ import React from "react";
 import InputHandler from "../components/input/InputHandler";
 import InputHeader from "../components/input/InputHeader";
 import PersonalStats from "../components/PersonalStats";
+import News from "../components/News";
 const Home = () => {
   return (
     <div>
@@ -11,11 +12,9 @@ const Home = () => {
           <InputHandler />
         </div>
       </header>
-      <main className="mt-12 p-6 lg:p-0">
-        <div className="flex flex-col">
-          <PersonalStats />
-          {/* <News /> */}
-        </div>
+      <main>
+        <News />
+        <PersonalStats />
       </main>
     </div>
   );
