@@ -35,7 +35,7 @@ const LastMatches = () => {
             <>
               <div
                 className={`flex flex-col justify-center items-center  w-full h-[100px] ${
-                  match.teams[searchedPlayer.team.toLowerCase()]?.has_won
+                  match.teams[searchedPlayer.team?.toLowerCase()]?.has_won
                     ? "bg-gradient-to-r from-green-200"
                     : "bg-gradient-to-r from-purple-200"
                 }`}
@@ -47,7 +47,7 @@ const LastMatches = () => {
                 <div className="font-roboto text-xl mt-2">
                   <span
                     className={`font-roboto font-bold text-xl ${
-                      match.teams[searchedPlayer.team.toLowerCase()]?.has_won
+                      match.teams[searchedPlayer.team?.toLowerCase()]?.has_won
                         ? "text-white-900"
                         : "text-[#ef5351]"
                     }`}
@@ -57,7 +57,7 @@ const LastMatches = () => {
                   :{" "}
                   <span
                     className={`font-roboto font-bold text-xl ${
-                      match.teams[searchedPlayer.team.toLowerCase()]?.has_won
+                      match.teams[searchedPlayer.team?.toLowerCase()]?.has_won
                         ? "text-white-900"
                         : "text-red-700"
                     }`}
@@ -83,14 +83,14 @@ const LastMatches = () => {
           >
             <div
               className={`flex w-full flew-wrap mt-4 cursor-pointer shadow-lg border-l-2 ${
-                match.teams[searchedPlayer.team.toLowerCase()]?.has_won
+                match.teams[searchedPlayer.team?.toLowerCase()]?.has_won
                   ? "border-[#16e5b4]"
                   : "border-[#ef5351]"
               }`}
             >
               <div
                 className={`h-full w-full lg:h-[100px] bg-[#0f1923] ${
-                  match.teams[searchedPlayer.team.toLowerCase()]?.has_won
+                  match.teams[searchedPlayer.team?.toLowerCase()]?.has_won
                     ? "bg-gradient-to-r from-blue-500"
                     : "bg-gradient-to-r from-purple-200"
                 } p-4 flex flex-col md:flex-row`}
