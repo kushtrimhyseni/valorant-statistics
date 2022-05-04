@@ -7,14 +7,22 @@
 
 .background {
   width: 100%;
-  height: 500px;
+  height: 400px;
   background: url("/public/assets/jettBG.webp") top center;
   background-size: cover;
   background-position: 50%;
   background-size: cover;
   border-bottom-left-radius: 10rem;
 }
-
+.single-match-bg {
+  width: 100%;
+  height: 300px;
+  background: url("/public/assets/jettBG.webp") top center;
+  background-size: cover;
+  background-position: 50%;
+  background-size: cover;
+  border-bottom-left-radius: 10rem;
+}
 .card-body {
   background: #232526; /* fallback for old browsers */
   background: -webkit-linear-gradient(

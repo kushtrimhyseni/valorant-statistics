@@ -58,7 +58,7 @@ const SingleMatch = () => {
   let ids = 0;
   return (
     <>
-      <header className="background grid grid-cols-1 md:grid-cols-2 place-items-center p-6">
+      <header className="single-match-bg grid grid-cols-1 md:grid-cols-2 place-items-center p-6">
         <div className="container mx-auto w-full md:w-1/2 white">
           <InputHeader />
         </div>
