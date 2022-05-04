@@ -160,6 +160,16 @@ const LastMatches = () => {
                     </span>
                   </div>
                   <div className="flex flex-col">
+                    <span className="text-sm text-[#99abbf] font-roboto text-center font-bold">
+                      ACS
+                    </span>
+                    <span className="text-xl font-roboto font-bold text-white-900 text-center">
+                      {Math.floor(
+                        searchedPlayer.stats.score / match.rounds.length
+                      )}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
                     <span className="text-sm text-[#99abbf] font-roboto font-bold">
                       HS
                     </span>

@@ -103,7 +103,7 @@ const SingleMatch = () => {
                         Match Rank
                       </th>
                       <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-white-900  border-b border-gray-200 bg-gray-50">
-                        Score
+                        ACS
                       </th>
                       <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-white-900  border-b border-gray-200 bg-gray-50">
                         K
@@ -162,7 +162,9 @@ const SingleMatch = () => {
 
                           <td className="px-6 py-4 whitespace-no-wrap border-b text-center border-gray-200">
                             <div className="text-md font-roboto font-bold leading-5 text-[#efefef]">
-                              {allplayers.stats.score}
+                              {Math.round(
+                                allplayers.stats.score / match.rounds.length
+                              )}
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-no-wrap border-b text-center border-gray-200">
@@ -270,7 +272,9 @@ const SingleMatch = () => {
 
                           <td className="px-6 py-4 whitespace-no-wrap border-b text-center border-gray-200">
                             <div className="text-md font-roboto font-bold leading-5 text-[#efefef]">
-                              {allplayers.stats.score}
+                              {Math.round(
+                                allplayers.stats.score / match.rounds.length
+                              )}
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-no-wrap border-b text-center border-gray-200">
