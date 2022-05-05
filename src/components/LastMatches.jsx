@@ -74,8 +74,6 @@ const LastMatches = () => {
         const searchedPlayer = match.players.all_players.find(
           (player) => player.name === input
         );
-        console.log(match);
-        console.log(searchedPlayer);
         const killDeathRatio = (
           searchedPlayer?.stats.kills / searchedPlayer?.stats.deaths
         ).toFixed(2);

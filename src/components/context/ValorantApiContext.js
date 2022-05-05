@@ -9,7 +9,7 @@ export const ValorantApiProvider = ({ children }) => {
   const [tag, setTag] = useState("");
   const [tier, setTier] = useState("");
   const [matches, setMatches] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [news, setNews] = useState([]);
 
   const playerStatistics = async () => {
