@@ -27,6 +27,7 @@ const LastMatches = () => {
       <div className="grid grid-cols-1 md:grid-col-3 lg:grid-cols-5 bg-[#1b2733]">
         {matches.data?.map((match) => {
           id++;
+          console.log(match);
           const searchedPlayer = match.players.all_players.find(
             (player) => player.name === input
           );

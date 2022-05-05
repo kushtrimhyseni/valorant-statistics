@@ -6,7 +6,7 @@ import ValorantApiContext from "../components/context/ValorantApiContext";
 import Spinner from "../components/Spiner";
 
 const SingleMatch = () => {
-  const { matches, loading, input } = useContext(ValorantApiContext);
+  const { matches, loading } = useContext(ValorantApiContext);
   const [agent, setAgent] = useState("");
   const [searchParams] = useSearchParams();
   const { id } = useParams();
@@ -56,17 +56,10 @@ const SingleMatch = () => {
     setMatch(data.data);
   };
 
-  let agentAvatar = "";
   let ids = 0;
   if (!loading) {
     return (
       <>
-        {matches.data?.map((match) => {
-          const searchedPlayer = match.players.all_players.find(
-            (player) => player.name === input
-          );
-          agentAvatar = searchedPlayer.assets.agent.small;
-        })}
         <header className="single-match-bg grid grid-cols-1 md:grid-cols-2 place-items-center p-6">
           <div className="container mx-auto w-full md:w-1/2 white">
             <InputHeader />
@@ -93,7 +86,7 @@ const SingleMatch = () => {
             </span>
             <img
               className="h-20 w-20 rounded-100 mx-auto mt-4"
-              src={agentAvatar}
+              src={`/assets/agents/${agent}.png`}
               alt=""
             />
           </div>
