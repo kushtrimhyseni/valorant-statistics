@@ -11,7 +11,6 @@ const SingleMatch = () => {
   const [searchParams] = useSearchParams();
   const { id } = useParams();
   const [match, setMatch] = useState([]);
-  const [avatar, setAvatar] = useState("");
 
   const getFavAgent = (matches) => {
     if (!matches) return;
