@@ -6,12 +6,11 @@ import ValorantApiContext from "../components/context/ValorantApiContext";
 import Spinner from "../components/Spiner";
 
 const SingleMatch = () => {
-  const { matches, loading, input } = useContext(ValorantApiContext);
+  const { matches, loading } = useContext(ValorantApiContext);
   const [agent, setAgent] = useState("");
   const [searchParams] = useSearchParams();
   const { id } = useParams();
   const [match, setMatch] = useState([]);
-  const [player, setPlayer] = useState("");
 
   const getFavAgent = (matches) => {
     if (!matches) return;
@@ -42,19 +41,10 @@ const SingleMatch = () => {
     });
   };
 
-  const getSearchedPlayer = (match) => {
-    match?.players?.all_players?.find((player) => {
-      const inputPlayer = player.name === input;
-      setPlayer(inputPlayer);
-      return inputPlayer;
-    });
-  };
-
   useEffect(() => {
     getSingleMatch();
     if (matches) {
       getFavAgent(matches.data);
-      getSearchedPlayer();
     }
   }, [matches]);
   const getSingleMatch = async () => {
