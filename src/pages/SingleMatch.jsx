@@ -6,11 +6,12 @@ import ValorantApiContext from "../components/context/ValorantApiContext";
 import Spinner from "../components/Spiner";
 
 const SingleMatch = () => {
-  const { matches, loading } = useContext(ValorantApiContext);
+  const { matches, loading, input } = useContext(ValorantApiContext);
   const [agent, setAgent] = useState("");
   const [searchParams] = useSearchParams();
   const { id } = useParams();
   const [match, setMatch] = useState([]);
+  const [player, setPlayer] = useState("");
 
   const getFavAgent = (matches) => {
     if (!matches) return;
@@ -41,13 +42,21 @@ const SingleMatch = () => {
     });
   };
 
+  const getSearchedPlayer = (match) => {
+    match?.players?.all_players?.find((player) => {
+      const inputPlayer = player.name === input;
+      setPlayer(inputPlayer);
+      return inputPlayer;
+    });
+  };
+
   useEffect(() => {
     getSingleMatch();
     if (matches) {
       getFavAgent(matches.data);
+      getSearchedPlayer();
     }
   }, [matches]);
-
   const getSingleMatch = async () => {
     const response = await fetch(
       `https://api.henrikdev.xyz/valorant/v2/match/${id}`
@@ -56,6 +65,9 @@ const SingleMatch = () => {
     setMatch(data.data);
   };
 
+  const searchedPlayer = match?.players?.all_players.find(
+    (player) => player.name === searchParams.get("user")
+  );
   let ids = 0;
   if (!loading) {
     return (
@@ -90,28 +102,79 @@ const SingleMatch = () => {
               alt=""
             />
           </div>
-          <div className="flex flex-col mb-8 lg:mt-0 col-span-2 p-6 lg:p-0">
+          <div className="flex flex-col lg:mt-0 col-span-2 p-6 lg:p-0">
             <div
-              className={`flex flex-col lg:flex-row justify-between items-start lg:items-center bg-[#0F1923] border-2 border-[#1b2733] shadow-lg rounded-lg p-6 mb-4`}
+              className={`flex flex-col items-start bg-[#0f1923] border-2 border-[#1b2733] shadow-lg rounded-t-xl p-6`}
             >
-              <span className="text-[#ffffff] text-3xl font-rajdhani font-bold">
-                Map: {match.metadata?.map}
-              </span>
-              <span className="text-[#ffffff] text-3xl font-rajdhani font-bold">
-                Mode: {match.metadata?.mode}
-              </span>
-              <span className="text-[#ffffff] text-3xl font-rajdhani font-bold">
-                Server: {match.metadata?.cluster}
-              </span>
+              <div className="flex justify-start items-center">
+                <svg viewBox="0 0 31.969 32" className="w-[32px] h-[32px] mr-2">
+                  <path d="M31.97 19v-6h-3V9.862a4.008 4.008 0 002.957-3.285l-1.974-.282a2 2 0 11-2.54-2.2l-.565-1.915a3.987 3.987 0 00.127 7.684V13h-9.99v-2.14a4 4 0 10-2 0V13H4.996V7.866a4 4 0 10-2 0V13h-3v6h8.996v2.14a4 4 0 102 0V19h9.99v5.137a4 4 0 102 0V19zm-5.994-4h4v2h-4zM13.987 7.009a2 2 0 112 2 2 2 0 01-2-2zm-11.988-3a2 2 0 112 2 2 2 0 01-2-1.997zM5.995 17h-4v-2h4zm5.994 7.992a2 2 0 11-2-2 2 2 0 012 1.999zm0-7.992h-4v-2h4zm5.994 0h-4v-2h4zm5.994 10.989a2 2 0 11-2-2 2 2 0 012 1.999zM19.981 17v-2h4v2z"></path>
+                  <path d="M29.704 5.011l1.729-1a4.028 4.028 0 00-1.974-1.71l-.745 1.853a2.02 2.02 0 01.99.857z"></path>
+                </svg>
+                <span className="text-[#ffffff] text-3xl font-rajdhani font-bold">
+                  Match Report
+                </span>
+              </div>
+            </div>
+            <div className="bg-[#0f1923] w-full mb-8 h-[88px] flex rounded-b-xl border-2 border-[#1b2733] p-4">
+              <div className="flex flex-col justify-center items-start md:mr-8">
+                <span className="text-[#EFEFEF] text-3xl font-rajdhani font-bold">
+                  {match?.metadata?.map}
+                </span>
+                <span className="text-[#99abbf] font-roboto text-sm">
+                  {match?.metadata?.mode}
+                </span>
+              </div>
+              <div className="flex">
+                <div className="flex flex-col justify-center items-center md:mr-4">
+                  <span className="text-[#16e5b4] text-3xl font-rajdhani font-bold">
+                    {
+                      match?.teams?.[searchedPlayer?.team.toLowerCase()]
+                        ?.rounds_won
+                    }
+                  </span>
+                  <span className="text-[#16e5b4] text-sm font-roboto">
+                    {searchedPlayer?.team}
+                  </span>
+                </div>
+                <span className="text-[#EFEFEF] text-3xl font-rajdhani font-bold">
+                  :
+                </span>
+                <div className="flex flex-col justify-center items-center md:ml-4">
+                  <span className="text-[#ff4655] text-3xl font-rajdhani font-bold">
+                    {searchedPlayer?.team === "Red"
+                      ? match.teams?.blue.rounds_won
+                      : match.teams?.red.rounds_won}
+                  </span>
+                  <span className="text-[#ff4655] text-sm font-roboto">
+                    {searchedPlayer?.team === "Red" ? "Blue" : "Red"}
+                  </span>
+                </div>
+              </div>
+              <div className="flex flex-col justify-start items-start md:ml-8">
+                <span className="text-[#EFEFEF] text-3xl font-rajdhani font-bold">
+                  {(match?.metadata?.game_length / 1000 / 60).toFixed(0)} min
+                </span>
+                <span className="text-[#99abbf] font-roboto text-sm">
+                  {match?.metadata?.game_start_patched}
+                </span>
+              </div>
             </div>
             <div className="flex flex-col col-span-2">
               <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                 <div className="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
                   <table className="min-w-full">
-                    <thead className="bg-[#00554d]">
+                    <thead
+                      className={`${
+                        match?.teams?.[searchedPlayer?.team.toLowerCase()]
+                          ?.has_won
+                          ? "bg-[#00554d]"
+                          : "bg-[#ff294e]"
+                      }`}
+                    >
                       <tr>
                         <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-[#00eab1]  border-b border-gray-200 bg-gray-50">
-                          Team A
+                          Team {searchedPlayer?.team === "Red" ? "Blue" : "Red"}
                         </th>
                         <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-white-900  border-b border-gray-200 bg-gray-50">
                           Match Rank
@@ -225,7 +288,7 @@ const SingleMatch = () => {
                     <thead className="bg-[#ff294e]">
                       <tr>
                         <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-[#00eab1]  border-b border-gray-200 bg-gray-50">
-                          Team B
+                          Team {searchedPlayer?.team}
                         </th>
                         <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-white-900  border-b border-gray-200 bg-gray-50">
                           Match Rank

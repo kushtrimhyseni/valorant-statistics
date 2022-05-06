@@ -43,10 +43,17 @@ export const ValorantApiProvider = ({ children }) => {
     }
   };
 
-  const getMatches = async (puuid) => {
-    const response = await fetch(
-      `https://api.henrikdev.xyz/valorant/v3/by-puuid/matches/eu/${puuid}`
-    );
+  const getMatches = async (puuid, options) => {
+    let response;
+    if (options) {
+      response = await fetch(
+        `https://api.henrikdev.xyz/valorant/v3/matches/eu/${options.user}/${options.tag}?filter=${options.filter}`
+      );
+    } else {
+      response = await fetch(
+        `https://api.henrikdev.xyz/valorant/v3/by-puuid/matches/eu/${puuid}`
+      );
+    }
     const data = await response.json();
     setMatches(data);
     setError("");
@@ -80,6 +87,7 @@ export const ValorantApiProvider = ({ children }) => {
         input,
         setInput,
         setTag,
+        tag,
         tier,
         playerRank,
         getMatches,

@@ -9,6 +9,7 @@ const InputHandler = () => {
   const clearInput = useRef();
 
   const inputHandler = (input) => {
+    if (input.keyCode === 13) return;
     const value = input.target.value;
     const seperatedValue = value.split("#");
     setInput(seperatedValue[0]);
@@ -29,14 +30,13 @@ const InputHandler = () => {
     setClear([]);
   };
 
-  // const handleKeyPress = (event) => {
-  //   if (event.keyCode === 13 && input === " ") {
-  //     alert("User field cannot be empty!");
-  //   } else {
-  //     playerStatistics();
-  //     clearInput.current.value = "";
-  //   }
-  // };
+  const handleKeyPress = (event) => {
+    if (event.keyCode === 13) {
+      playerStatistics();
+      setClear(playerStatistics);
+      clearInput.current.value = "";
+    }
+  };
   return (
     <>
       <div className="mt-4 flex flex-col md:flex-row">
@@ -55,6 +55,7 @@ const InputHandler = () => {
           <input
             ref={clearInput}
             onKeyUp={inputHandler}
+            onKeyDown={handleKeyPress}
             type="text"
             placeholder="Find an Agent, ie. player#NA1"
             className="input w-full md:w-[275px] bg-[#f1f1f1] border-t-2"

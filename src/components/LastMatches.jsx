@@ -1,8 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ValorantApiContext from "./context/ValorantApiContext";
 import { Link } from "react-router-dom";
 const LastMatches = () => {
-  const { matches, playerData, input } = useContext(ValorantApiContext);
+  const { matches, playerData, input, getMatches, tag } =
+    useContext(ValorantApiContext);
+  const [clicked, setClicked] = useState(false);
+  const handleClick = (value) => {
+    getMatches("", { user: input, tag, filter: value });
+    setClicked(value);
+  };
+
   let id = 0;
   return (
     <div
@@ -16,7 +23,7 @@ const LastMatches = () => {
 
         <div className="flex flex-col">
           <span className="text-white-900 font-rajdhani text-2xl font-bold">
-            Last 5 Matches
+            Matches
           </span>
           <span className="text-[#99abbf] font-roboto font-bold">
             Updated: {playerData.data?.last_update}
@@ -24,10 +31,49 @@ const LastMatches = () => {
         </div>
       </div>
 
+      <ul className="modes flex items-center justify-center h-[60px] m-0 p-1 list-none w-full">
+        <li
+          className={`single-mode bg-[#ff4655] flex rounded-sm whitespace-no-wrap h-8 items-center justify-center select-none text-[#EFEFEF] text-md font-roboto cursor-pointer`}
+        >
+          Last 5
+        </li>
+        <li
+          className={`${
+            clicked === "Competitive" ? "bg-[#ff4655]" : ""
+          } single-mode flex rounded-sm whitespace-no-wrap h-8 items-center justify-center select-none text-[#EFEFEF] text-md font-roboto cursor-pointer`}
+          onClick={() => handleClick("Competitive")}
+        >
+          Competitive
+        </li>
+        <li
+          className={`${
+            clicked === "Unrated" ? "bg-[#ff4655]" : ""
+          } single-mode flex rounded-sm whitespace-no-wrap h-8 items-center justify-center select-none text-[#EFEFEF] text-md font-roboto cursor-pointer`}
+          onClick={() => handleClick("Unrated")}
+        >
+          Unrated
+        </li>
+        <li
+          className={`${
+            clicked === "SpikeRush" ? "bg-[#ff4655]" : ""
+          } single-mode flex rounded-sm whitespace-no-wrap h-8 items-center justify-center select-none text-[#EFEFEF] text-md font-roboto cursor-pointer`}
+          onClick={() => handleClick("SpikeRush")}
+        >
+          Spike Rush
+        </li>
+        <li
+          className={`${
+            clicked === "Escalation" ? "bg-[#ff4655]" : ""
+          } single-mode flex rounded-sm whitespace-no-wrap h-8 items-center justify-center select-none text-[#EFEFEF] text-md font-roboto cursor-pointer`}
+          onClick={() => handleClick("Escalation")}
+        >
+          Escalation
+        </li>
+      </ul>
+
       <div className="grid grid-cols-1 md:grid-col-3 lg:grid-cols-5 bg-[#1b2733]">
         {matches.data?.map((match) => {
           id++;
-          console.log(match);
           const searchedPlayer = match.players.all_players.find(
             (player) => player.name === input
           );

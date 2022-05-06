@@ -16,23 +16,23 @@ const PersonalStats = () => {
             <div className="card card-side shadow-xl flex flex-col md:flex-row h-full md:h-[375px] col-span-1">
               <figure>
                 <img
-                  src={playerData.data.card.large}
+                  src={playerData.data?.card?.large}
                   alt="PlayerCard"
                   className="w-full md:w-[200px] h-[350px] object-center md:h-full lg:object-top"
                 />
               </figure>
               <div className="card-body w-full h-full">
                 <h2 className="card-title">
-                  {playerData.data.name}#{playerData.data.tag}
+                  {playerData.data?.name}#{playerData.data?.tag}
                 </h2>
                 <span className="font-rajdhani font-md text-xl text-[#EFEFEF]">
-                  Account Level: {playerData.data.account_level}
+                  Account Level: {playerData.data?.account_level}
                 </span>
                 <span className="font-rajdhani font-md text-xl text-[#EFEFEF]">
-                  Region: {playerData.data.region.toUpperCase()}
+                  Region: {playerData.data?.region.toUpperCase()}
                 </span>
                 <span className="font-rajdhani font-md text-xl text-[#EFEFEF]">
-                  Last update: {playerData.data.last_update}
+                  Last update: {playerData.data?.last_update}
                 </span>
                 <span className="font-rajdhani font-md text-xl text-[#EFEFEF]">
                   Current Tier: {tier.data?.currenttier}
