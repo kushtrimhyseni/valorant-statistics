@@ -5,6 +5,7 @@ const LastMatches = () => {
   const { matches, playerData, input, getMatches, tag } =
     useContext(ValorantApiContext);
   const [clicked, setClicked] = useState(false);
+
   const handleClick = (value) => {
     getMatches("", { user: input, tag, filter: value });
     setClicked(value);
@@ -33,14 +34,16 @@ const LastMatches = () => {
 
       <ul className="modes flex items-center justify-center h-[60px] m-0 p-1 list-none w-full">
         <li
-          className={`single-mode bg-[#ff4655] flex rounded-sm whitespace-no-wrap h-8 items-center justify-center select-none text-[#EFEFEF] text-md font-roboto cursor-pointer`}
+          className={`${
+            clicked ? "" : "bg-[#ff4655]"
+          } single-mode flex rounded-sm font-bold whitespace-no-wrap h-8 items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
         >
           Last 5
         </li>
         <li
           className={`${
             clicked === "Competitive" ? "bg-[#ff4655]" : ""
-          } single-mode flex rounded-sm whitespace-no-wrap h-8 items-center justify-center select-none text-[#EFEFEF] text-md font-roboto cursor-pointer`}
+          } single-mode flex rounded-sm whitespace-no-wrap h-8 font-bold items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
           onClick={() => handleClick("Competitive")}
         >
           Competitive
@@ -48,7 +51,7 @@ const LastMatches = () => {
         <li
           className={`${
             clicked === "Unrated" ? "bg-[#ff4655]" : ""
-          } single-mode flex rounded-sm whitespace-no-wrap h-8 items-center justify-center select-none text-[#EFEFEF] text-md font-roboto cursor-pointer`}
+          } single-mode flex rounded-sm whitespace-no-wrap h-8 font-bold items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
           onClick={() => handleClick("Unrated")}
         >
           Unrated
@@ -56,7 +59,7 @@ const LastMatches = () => {
         <li
           className={`${
             clicked === "SpikeRush" ? "bg-[#ff4655]" : ""
-          } single-mode flex rounded-sm whitespace-no-wrap h-8 items-center justify-center select-none text-[#EFEFEF] text-md font-roboto cursor-pointer`}
+          } single-mode flex rounded-sm whitespace-no-wrap h-8 font-bold items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
           onClick={() => handleClick("SpikeRush")}
         >
           Spike Rush
@@ -64,7 +67,7 @@ const LastMatches = () => {
         <li
           className={`${
             clicked === "Escalation" ? "bg-[#ff4655]" : ""
-          } single-mode flex rounded-sm whitespace-no-wrap h-8 items-center justify-center select-none text-[#EFEFEF] text-md font-roboto cursor-pointer`}
+          } single-mode flex rounded-sm whitespace-no-wrap h-8 font-bold items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
           onClick={() => handleClick("Escalation")}
         >
           Escalation

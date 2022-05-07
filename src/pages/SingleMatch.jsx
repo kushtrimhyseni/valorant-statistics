@@ -11,10 +11,12 @@ const SingleMatch = () => {
   const [searchParams] = useSearchParams();
   const { id } = useParams();
   const [match, setMatch] = useState([]);
+  const [weapon, setWeapon] = useState("");
 
-  const getFavAgent = (matches) => {
+  const getFavAgentAndWeapon = (matches) => {
     if (!matches) return;
     const agentOccurrences = {};
+    const weaponOccurences = {};
 
     matches.forEach((match) => {
       const matchPlayer = match.players.all_players.find((matchPlayer) => {
@@ -39,14 +41,53 @@ const SingleMatch = () => {
       });
       setAgent(bestAgent.name);
     });
-  };
 
+    matches.forEach((match) => {
+      const allKills = match.kills.filter((favoriteWeapon) => {
+        const killerName = searchParams.get("user");
+        const killerTag = searchParams.get("tag");
+        const fullUser = `${killerName}#${killerTag}`;
+
+        return favoriteWeapon.killer_display_name === fullUser;
+      });
+
+      allKills.forEach((kill) => {
+        if (!kill.damage_weapon_name) return;
+        if (weaponOccurences.hasOwnProperty(kill?.damage_weapon_name)) {
+          weaponOccurences[kill?.damage_weapon_name].count++;
+        } else {
+          weaponOccurences[kill?.damage_weapon_name] = {
+            count: 1,
+            image: kill.damage_weapon_assets.display_icon,
+          };
+        }
+      });
+
+      let bestWeapon = null;
+
+      Object.keys(weaponOccurences).forEach((damage_weapon_name) => {
+        if (
+          !bestWeapon ||
+          weaponOccurences[damage_weapon_name].count > bestWeapon.count
+        ) {
+          bestWeapon = {
+            name: damage_weapon_name,
+            count: weaponOccurences[damage_weapon_name].count,
+            image: weaponOccurences[damage_weapon_name].image,
+          };
+        }
+      });
+
+      setWeapon({ name: bestWeapon.name, image: bestWeapon.image });
+    });
+  };
   useEffect(() => {
     getSingleMatch();
     if (matches) {
-      getFavAgent(matches.data);
+      getFavAgentAndWeapon(matches.data);
     }
   }, [matches]);
+
   const getSingleMatch = async () => {
     const response = await fetch(
       `https://api.henrikdev.xyz/valorant/v2/match/${id}`
@@ -55,9 +96,6 @@ const SingleMatch = () => {
     setMatch(data.data);
   };
 
-  const searchedPlayer = match?.players?.all_players.find(
-    (player) => player.name === searchParams.get("user")
-  );
   let ids = 0;
   if (!loading) {
     return (
@@ -79,18 +117,33 @@ const SingleMatch = () => {
           </Link>
         </header>
         <div className="container mx-auto mt-4 grid grid-cols-1 lg:grid-cols-3 lg:gap-2 mb-8">
-          <div className="flex flex-col col-span-1 p-6 lg:p-0 bg-[#0F1923] shadow-lg h-[200px] rounded-lg border-2 border-[#1b2733]">
-            <span className="mt-4 text-center text-white-900 font-rajdhani text-md font-bold">
-              Top Agent Last 5 Matches:
-            </span>
-            <span className="text-center text-white-900 font-rajdhani text-xl font-bold">
-              {agent}
-            </span>
-            <img
-              className="h-20 w-20 rounded-100 mx-auto mt-4"
-              src={`/assets/agents/${agent}.png`}
-              alt=""
-            />
+          <div>
+            <div className="flex flex-col col-span-1 p-6 lg:p-0 bg-[#0F1923] shadow-lg h-[200px] rounded-lg border-2 border-[#1b2733]">
+              <span className="mt-4 text-center text-white-900 font-rajdhani text-md font-bold">
+                Most Played Agent:
+              </span>
+              <span className="text-center text-white-900 font-rajdhani text-xl font-bold">
+                {agent}
+              </span>
+              <img
+                className="h-20 w-20 rounded-100 mx-auto mt-4"
+                src={`/assets/agents/${agent}.png`}
+                alt=""
+              />
+            </div>
+            <div className="flex flex-col col-span-1 p-6 lg:p-0 bg-[#0F1923] shadow-lg h-[200px] rounded-lg border-2 border-[#1b2733]">
+              <span className="mt-4 text-center text-white-900 font-rajdhani text-md font-bold">
+                Most Played Weapon:
+              </span>
+              <span className="text-center text-white-900 font-rajdhani text-xl font-bold">
+                {weapon.name}
+              </span>
+              <img
+                className="w-full md:w-1/2 mx-auto mt-4"
+                src={weapon.image}
+                alt=""
+              />
+            </div>
           </div>
           <div className="flex flex-col lg:mt-0 col-span-2 p-6 lg:p-0">
             <div
@@ -117,27 +170,46 @@ const SingleMatch = () => {
               </div>
               <div className="flex">
                 <div className="flex flex-col justify-center items-center md:mr-4">
-                  <span className="text-[#16e5b4] text-3xl font-rajdhani font-bold">
-                    {
-                      match?.teams?.[searchedPlayer?.team.toLowerCase()]
-                        ?.rounds_won
-                    }
+                  <span
+                    className={`${
+                      match?.teams?.blue.has_won
+                        ? "text-[#16e5b4]"
+                        : "text-[#ff4655]"
+                    } text-3xl font-rajdhani font-bold`}
+                  >
+                    {match?.teams?.blue.rounds_won}
                   </span>
-                  <span className="text-[#16e5b4] text-sm font-roboto">
-                    {searchedPlayer?.team}
+                  <span
+                    className={`${
+                      match?.teams?.blue.has_won
+                        ? "text-[#16e5b4]"
+                        : "text-[#ff4655]"
+                    } text-sm font-roboto`}
+                  >
+                    Blue
                   </span>
                 </div>
                 <span className="text-[#EFEFEF] text-3xl font-rajdhani font-bold">
                   :
                 </span>
                 <div className="flex flex-col justify-center items-center md:ml-4">
-                  <span className="text-[#ff4655] text-3xl font-rajdhani font-bold">
-                    {searchedPlayer?.team === "Red"
-                      ? match.teams?.blue.rounds_won
-                      : match.teams?.red.rounds_won}
+                  <span
+                    className={`${
+                      match?.teams?.red?.has_won
+                        ? "text-[#16e5b4]"
+                        : "text-[#ff4655]"
+                    } text-3xl font-rajdhani font-bold`}
+                  >
+                    {match?.teams?.red.rounds_won}
                   </span>
-                  <span className="text-[#ff4655] text-sm font-roboto">
-                    {searchedPlayer?.team === "Red" ? "Blue" : "Red"}
+                  <span
+                    className={`${
+                      match?.teams?.red?.has_won
+                        ? "text-[#16e5b4]"
+                        : "text-[#ff4655]"
+                    } text-sm font-roboto`}
+                  >
+                    Red
                   </span>
                 </div>
               </div>
@@ -156,15 +228,14 @@ const SingleMatch = () => {
                   <table className="min-w-full">
                     <thead
                       className={`${
-                        match?.teams?.[searchedPlayer?.team.toLowerCase()]
-                          ?.has_won
+                        match.teams?.blue.has_won
                           ? "bg-[#00554d]"
                           : "bg-[#ff294e]"
                       }`}
                     >
                       <tr>
                         <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-[#00eab1]  border-b border-gray-200 bg-gray-50">
-                          Team {searchedPlayer?.team === "Red" ? "Blue" : "Red"}
+                          Team Blue
                         </th>
                         <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-white-900  border-b border-gray-200 bg-gray-50">
                           Match Rank
@@ -193,7 +264,13 @@ const SingleMatch = () => {
                       </tr>
                     </thead>
 
-                    <tbody className="bg-gradient-to-r from-blue-500">
+                    <tbody
+                      className={`${
+                        match.teams?.blue.has_won
+                          ? "bg-gradient-to-r from-blue-500"
+                          : "bg-gradient-to-r from-purple-200"
+                      }`}
+                    >
                       {match.players?.blue?.map((allplayers) => {
                         ids++;
                         const kd =
@@ -275,10 +352,16 @@ const SingleMatch = () => {
                         );
                       })}
                     </tbody>
-                    <thead className="bg-[#ff294e]">
+                    <thead
+                      className={`${
+                        match.teams?.red.has_won
+                          ? "bg-[#00554d]"
+                          : "bg-[#ff294e]"
+                      }`}
+                    >
                       <tr>
                         <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-[#00eab1]  border-b border-gray-200 bg-gray-50">
-                          Team {searchedPlayer?.team}
+                          Team Red
                         </th>
                         <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-white-900  border-b border-gray-200 bg-gray-50">
                           Match Rank
@@ -310,7 +393,13 @@ const SingleMatch = () => {
                       const kd =
                         allplayers.stats.kills - allplayers.stats.deaths;
                       return (
-                        <tbody className="bg-gradient-to-r from-purple-200">
+                        <tbody
+                          className={`${
+                            match.teams?.red.has_won
+                              ? "bg-gradient-to-r from-blue-500"
+                              : "bg-gradient-to-r from-purple-200"
+                          }`}
+                        >
                           <tr>
                             <td className="px-6 py-4 whitespace-no-wrap border-b text-center border-gray-200">
                               <div className="flex items-center">
