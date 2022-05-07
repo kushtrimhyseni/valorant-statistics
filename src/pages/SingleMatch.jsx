@@ -117,8 +117,8 @@ const SingleMatch = () => {
           </Link>
         </header>
         <div className="container mx-auto mt-4 grid grid-cols-1 lg:grid-cols-3 lg:gap-2 mb-8">
-          <div>
-            <div className="flex flex-col col-span-1 p-6 lg:p-0 bg-[#0F1923] shadow-lg h-[200px] rounded-lg border-2 border-[#1b2733]">
+          <div className="p-6 md:p-0">
+            <div className="flex flex-col col-span-1 p-6 md:p-0 bg-[#0F1923] shadow-lg h-[200px] rounded-lg border-2 border-[#1b2733]">
               <span className="mt-4 text-center text-white-900 font-rajdhani text-md font-bold">
                 Most Played Agent:
               </span>
@@ -131,7 +131,7 @@ const SingleMatch = () => {
                 alt=""
               />
             </div>
-            <div className="flex flex-col col-span-1 p-6 lg:p-0 bg-[#0F1923] shadow-lg h-[200px] rounded-lg border-2 border-[#1b2733]">
+            <div className="flex flex-col col-span-1 p-6 lg:p-0 bg-[#0F1923] shadow-lg h-auto md:h-[250px] justify-center items-center rounded-lg border-2 border-[#1b2733]">
               <span className="mt-4 text-center text-white-900 font-rajdhani text-md font-bold">
                 Most Played Weapon:
               </span>
@@ -145,7 +145,7 @@ const SingleMatch = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col lg:mt-0 col-span-2 p-6 lg:p-0">
+          <div className="flex flex-col md:mt-4 lg:mt-0 col-span-2 p-6 md:p-0">
             <div
               className={`flex flex-col items-start bg-[#0f1923] border-2 border-[#1b2733] shadow-lg rounded-t-xl p-6`}
             >
@@ -159,8 +159,8 @@ const SingleMatch = () => {
                 </span>
               </div>
             </div>
-            <div className="bg-[#0f1923] w-full mb-8 h-[88px] flex rounded-b-xl border-2 border-[#1b2733] p-4">
-              <div className="flex flex-col justify-center items-start md:mr-8">
+            <div className="bg-[#0f1923] w-full mb-8 md:h-[88px] flex flex-col md:flex-row rounded-b-xl border-2 border-[#1b2733] p-4">
+              <div className="flex flex-col justify-center items-center md:items-start md:mr-8">
                 <span className="text-[#EFEFEF] text-3xl font-rajdhani font-bold">
                   {match?.metadata?.map}
                 </span>
@@ -168,8 +168,8 @@ const SingleMatch = () => {
                   {match?.metadata?.mode}
                 </span>
               </div>
-              <div className="flex">
-                <div className="flex flex-col justify-center items-center md:mr-4">
+              <div className="flex justify-center items-center md:items-start">
+                <div className="flex flex-col justify-center items-center md:items-start md:mr-4">
                   <span
                     className={`${
                       match?.teams?.blue.has_won
@@ -189,7 +189,7 @@ const SingleMatch = () => {
                     Blue
                   </span>
                 </div>
-                <span className="text-[#EFEFEF] text-3xl font-rajdhani font-bold">
+                <span className="text-[#EFEFEF] text-3xl font-rajdhani font-bold justify-center items-center md:items-start">
                   :
                 </span>
                 <div className="flex flex-col justify-center items-center md:ml-4">
@@ -213,7 +213,7 @@ const SingleMatch = () => {
                   </span>
                 </div>
               </div>
-              <div className="flex flex-col justify-start items-start md:ml-8">
+              <div className="flex flex-col justify-center items-center md:items-start md:ml-8">
                 <span className="text-[#EFEFEF] text-3xl font-rajdhani font-bold">
                   {(match?.metadata?.game_length / 1000 / 60).toFixed(0)} min
                 </span>

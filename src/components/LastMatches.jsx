@@ -32,7 +32,7 @@ const LastMatches = () => {
         </div>
       </div>
 
-      <ul className="modes flex items-center justify-center h-[60px] m-0 p-1 list-none w-full">
+      <ul className="modes overflow-auto md:overflow-hidden flex items-center justify-center h-[60px] m-0 p-1 list-none w-full">
         <li
           className={`${
             clicked ? "" : "bg-[#ff4655]"
