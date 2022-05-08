@@ -65,7 +65,7 @@ const InputHandler = () => {
           onClick={clearResults}
           className={`${
             playerData.data ? "flex" : "hidden"
-          } clear-results w-[100px] h-[40px] md:ml-4`}
+          } clear-results w-[100px] h-[40px] pt-4 md:pt-0 mx-auto md:mx-0 md:ml-4`}
         >
           <a href="/" className="transparent">
             <p className="h-[40px]">

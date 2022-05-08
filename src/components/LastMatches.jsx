@@ -34,18 +34,18 @@ const LastMatches = () => {
           </div>
         </div>
 
-        <ul className="modes overflow-auto md:overflow-hidden flex items-center justify-center h-[60px] m-0 p-1 list-none w-full">
+        <ul className="modes overflow-auto md:overflow-hidden flex md:items-center md:justify-center h-[60px] m-0 p-1 list-none w-full">
           <li
             className={`${
               clicked ? "" : "bg-[#ff4655]"
-            } single-mode flex rounded-sm font-bold whitespace-no-wrap h-8 items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
+            } single-mode flex rounded-sm font-bold h-8 items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
           >
             Last 5
           </li>
           <li
             className={`${
               clicked === "Competitive" ? "bg-[#ff4655]" : ""
-            } single-mode flex rounded-sm whitespace-no-wrap h-8 font-bold items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
+            } single-mode flex rounded-sm h-8 font-bold items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
             onClick={() => handleClick("Competitive")}
           >
             Competitive
@@ -53,7 +53,7 @@ const LastMatches = () => {
           <li
             className={`${
               clicked === "Unrated" ? "bg-[#ff4655]" : ""
-            } single-mode flex rounded-sm whitespace-no-wrap h-8 font-bold items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
+            } single-mode flex rounded-sm h-8 font-bold items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
             onClick={() => handleClick("Unrated")}
           >
             Unrated
@@ -61,7 +61,7 @@ const LastMatches = () => {
           <li
             className={`${
               clicked === "SpikeRush" ? "bg-[#ff4655]" : ""
-            } single-mode flex rounded-sm whitespace-no-wrap h-8 font-bold items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
+            } single-mode flex rounded-sm h-8 font-bold items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
             onClick={() => handleClick("SpikeRush")}
           >
             Spike Rush
@@ -69,10 +69,18 @@ const LastMatches = () => {
           <li
             className={`${
               clicked === "Escalation" ? "bg-[#ff4655]" : ""
-            } single-mode flex rounded-sm whitespace-no-wrap h-8 font-bold items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
+            } single-mode flex rounded-sm h-8 font-bold items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
             onClick={() => handleClick("Escalation")}
           >
             Escalation
+          </li>
+          <li
+            className={`${
+              clicked === "Replication" ? "bg-[#ff4655]" : ""
+            } single-mode flex rounded-sm h-8 font-bold items-center justify-center select-none text-[#EFEFEF] text-md font-rajdhani cursor-pointer`}
+            onClick={() => handleClick("Replication")}
+          >
+            Replication
           </li>
         </ul>
 
@@ -167,31 +175,32 @@ const LastMatches = () => {
                       alt=""
                     />
                   </div>
-                  <div className="flex justify-around w-full items-center ml-0 md:ml-6 mt-6 md:mt-0">
-                    <div className="flex flex-col justify-center items-center">
-                      <div className="flex">
-                        <span
-                          className={`font-roboto font-bold text-xl ${
-                            match.teams.blue.has_won
-                              ? "text-white-900"
-                              : "text-[#ef5351]"
-                          }`}
-                        >
-                          {match.teams.blue.rounds_won} :{" "}
-                          <span
-                            className={`font-roboto font-bold text-xl ${
-                              match.teams.red.has_won
-                                ? "text-white-900"
-                                : "text-red-700"
-                            }`}
-                          >
-                            {" "}
-                            {match.teams.red.rounds_won}
-                          </span>{" "}
-                        </span>
-                      </div>
-                      {/* <span>MVP</span> */}
+                  <div className="flex flex-col md:flex-row justify-center items-center mt-4 md:mt-0">
+                    <div className="flex justify-center items-center ml-4 w-full">
+                      <span
+                        className={`font-roboto font-bold text-xl ${
+                          match.teams.blue.has_won
+                            ? "text-white-900"
+                            : "text-[#ef5351]"
+                        }`}
+                      >
+                        {match.teams.blue.rounds_won}{" "}
+                      </span>
+                      <span className="ml-2">:</span>
+                      <span
+                        className={`font-roboto font-bold text-xl ml-2 ${
+                          match.teams.red.has_won
+                            ? "text-white-900"
+                            : "text-red-700"
+                        }`}
+                      >
+                        {" "}
+                        {match.teams.red.rounds_won}
+                      </span>{" "}
                     </div>
+                    {/* <span>MVP</span> */}
+                  </div>
+                  <div className="flex justify-around w-full items-center ml-0 md:ml-6 mt-6 md:mt-0">
                     <div className="flex flex-col">
                       <span className="flex justify-end items-end text-sm text-[#99abbf] font-roboto font-bold">
                         K/D/A
