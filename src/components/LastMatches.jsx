@@ -159,7 +159,7 @@ const LastMatches = () => {
                 >
                   <div className="flex w-full lg:max-w-[320px] justify-around md:justify-between items-center ml-0 md:ml-4">
                     <img
-                      className="w-10 h-10"
+                      className="w-20 h-20"
                       src={searchedPlayer?.assets?.agent.small}
                       alt=""
                     />
@@ -167,7 +167,16 @@ const LastMatches = () => {
                       <span className="font-rajdhani font-bold text-2xl text-white-900">
                         {match.metadata.map}
                       </span>
-                      <span>{match.metadata.mode}</span>
+                      <div className="flex">
+                        <img
+                          className="w-[1.5rem] h-[1.5rem]"
+                          src={`/assets/modes/${match.metadata.mode}.webp`}
+                          alt=""
+                        />
+                        <span className="font-md ml-1">
+                          {match.metadata.mode}
+                        </span>
+                      </div>
                     </div>
                     <img
                       className="w-10 h-10"
@@ -175,6 +184,7 @@ const LastMatches = () => {
                       alt=""
                     />
                   </div>
+
                   <div className="flex flex-col md:flex-row justify-center items-center mt-4 md:mt-0">
                     <div className="flex justify-center items-center ml-4 w-full">
                       <span
