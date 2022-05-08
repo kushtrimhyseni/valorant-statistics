@@ -3,7 +3,7 @@ import spinner from "./assets/spinner.gif";
 
 const Spinner = () => {
   return (
-    <div className="w-100 mt-20">
+    <div className="w-100 mx-auto flex justify-center items-center">
       <img
         width={180}
         src={spinner}
