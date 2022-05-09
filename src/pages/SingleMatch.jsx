@@ -4,6 +4,9 @@ import { useParams, Link, useSearchParams } from "react-router-dom";
 import InputHeader from "../components/input/InputHeader";
 import ValorantApiContext from "../components/context/ValorantApiContext";
 import Spinner from "../components/Spiner";
+import "jquery/dist/jquery.min.js";
+import "datatables.net-dt/js/dataTables.dataTables";
+import $ from "jquery";
 
 const SingleMatch = () => {
   const { matches, loading } = useContext(ValorantApiContext);
@@ -95,6 +98,19 @@ const SingleMatch = () => {
     const data = await response.json();
     setMatch(data.data);
   };
+
+  //initialize datatable
+  $(document).ready(function () {
+    setTimeout(function () {
+      $("table.display").DataTable({
+        retrieve: true,
+        aaSorting: [],
+        order: [2, "desc"],
+        paging: false,
+        searching: false,
+      });
+    }, 1000);
+  });
 
   let ids = 0;
   if (!loading) {
@@ -225,7 +241,7 @@ const SingleMatch = () => {
             <div className="flex flex-col col-span-2">
               <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                 <div className="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-                  <table className="min-w-full">
+                  <table id="" className="display min-w-full">
                     <thead
                       className={`${
                         match.teams?.blue.has_won
@@ -352,6 +368,8 @@ const SingleMatch = () => {
                         );
                       })}
                     </tbody>
+                  </table>
+                  <table id="" className="display min-w-full">
                     <thead
                       className={`${
                         match.teams?.red.has_won
@@ -390,6 +408,7 @@ const SingleMatch = () => {
                       </tr>
                     </thead>
                     {match.players?.red?.map((allplayers) => {
+                      ids++;
                       const kd =
                         allplayers.stats.kills - allplayers.stats.deaths;
                       return (
@@ -400,7 +419,7 @@ const SingleMatch = () => {
                               : "bg-gradient-to-r from-purple-200"
                           }`}
                         >
-                          <tr>
+                          <tr key={ids}>
                             <td className="px-6 py-4 whitespace-no-wrap border-b text-center border-gray-200">
                               <div className="flex items-center">
                                 <div className="flex-shrink-0 w-10 h-10">
