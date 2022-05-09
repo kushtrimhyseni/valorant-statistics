@@ -253,7 +253,7 @@ const SingleMatch = () => {
                         <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-[#00eab1]  border-b border-gray-200 bg-gray-50">
                           Team Blue
                         </th>
-                        <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-white-900  border-b border-gray-200 bg-gray-50">
+                        <th className="px-6 py-3 text-xs whitespace-no-wrap font-medium leading-4 tracking-wider text-center text-white-900  border-b border-gray-200 bg-gray-50">
                           Match Rank
                         </th>
                         <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-white-900  border-b border-gray-200 bg-gray-50">
@@ -381,7 +381,7 @@ const SingleMatch = () => {
                         <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-[#00eab1]  border-b border-gray-200 bg-gray-50">
                           Team Red
                         </th>
-                        <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-white-900  border-b border-gray-200 bg-gray-50">
+                        <th className="px-6 py-3 text-xs whitespace-no-wrap font-medium leading-4 tracking-wider text-center text-white-900  border-b border-gray-200 bg-gray-50">
                           Match Rank
                         </th>
                         <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-white-900  border-b border-gray-200 bg-gray-50">
