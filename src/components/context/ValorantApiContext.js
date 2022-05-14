@@ -92,7 +92,7 @@ export const ValorantApiProvider = ({ children }) => {
     const weaponOccurences = {};
 
     matches.forEach((match) => {
-      const matchPlayer = match.players.all_players.find((matchPlayer) => {
+      const matchPlayer = match?.players.all_players.find((matchPlayer) => {
         return (
           matchPlayer?.name === input && matchPlayer.tag === tag.toUpperCase()
         );
