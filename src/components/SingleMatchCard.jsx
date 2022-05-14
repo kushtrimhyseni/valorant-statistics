@@ -13,7 +13,7 @@ const SingleMatchCard = () => {
           const searchedPlayer = match?.players?.all_players.find(
             (player) => player.name === input
           );
-          const date = match.metadata.game_start_patched.split("2022");
+          const date = match?.metadata.game_start_patched.split("2022");
           return (
             <>
               <div
