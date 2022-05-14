@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
 import ValorantApiContext from "./context/ValorantApiContext";
 const News = () => {
-  const { news, playerData } = useContext(ValorantApiContext);
+  const { news } = useContext(ValorantApiContext);
   let id = 0;
   return (
     <>
       <div
-        className={`bg-gradient-to-r from-purple-200 flex justify-around items-center flex-wrap mx-auto ${
-          playerData.data ? "hidden" : "flex"
-        }`}
+        className={`bg-gradient-to-r from-purple-200 flex justify-around items-center flex-wrap mx-auto`}
       >
         {news?.slice(0, 3).map((article) => {
           const date = article.date.split("T");

@@ -36,7 +36,7 @@ const AgentCard = () => {
           </span>
           <div className="flex items-center">
             <img
-              src={`assets/ranks/${tier.data?.currenttierpatched}.webp`}
+              src={`/assets/ranks/${tier.data?.currenttierpatched}.webp`}
               alt={tier.data?.currenttierpatched}
               className="w-[48px] h-[48px]"
             />

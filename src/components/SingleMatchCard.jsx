@@ -101,7 +101,7 @@ const SingleMatchCard = () => {
                   </div>
                   <img
                     className="w-10 h-10"
-                    src={`assets/ranks/${searchedPlayer?.currenttier_patched}.webp`}
+                    src={`/assets/ranks/${searchedPlayer?.currenttier_patched}.webp`}
                     alt=""
                   />
                 </div>

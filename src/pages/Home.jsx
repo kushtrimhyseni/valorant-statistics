@@ -1,7 +1,6 @@
 import React from "react";
 import InputHandler from "../components/input/InputHandler";
 import InputHeader from "../components/input/InputHeader";
-import PersonalStats from "../components/PersonalStats";
 import News from "../components/News";
 import Footer from "../components/Footer";
 const Home = () => {
@@ -15,7 +14,6 @@ const Home = () => {
       </header>
       <main>
         <News />
-        <PersonalStats />
         <Footer />
       </main>
     </div>
