@@ -10,7 +10,7 @@ const SingleMatchCard = () => {
       <div className="grid grid-cols-1 md:grid-col-3 lg:grid-cols-5 bg-[#1b2733]">
         {matches.data?.map((match) => {
           id++;
-          const searchedPlayer = match?.players.all_players.find(
+          const searchedPlayer = match?.players?.all_players.find(
             (player) => player.name === input
           );
           const date = match.metadata.game_start_patched.split("2022");
