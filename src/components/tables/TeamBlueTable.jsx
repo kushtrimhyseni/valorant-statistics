@@ -25,7 +25,7 @@ const TeamBlueTable = () => {
       <table className="min-w-full">
         <thead
           className={`${
-            match.teams?.blue.has_won ? "bg-[#00554d]" : "bg-[#ff294e]"
+            match?.teams?.blue.has_won ? "bg-[#00554d]" : "bg-[#ff294e]"
           }`}
         >
           <tr>
@@ -61,12 +61,12 @@ const TeamBlueTable = () => {
 
         <tbody
           className={`${
-            match.teams?.blue.has_won
+            match?.teams?.blue.has_won
               ? "bg-gradient-to-r from-blue-500"
               : "bg-gradient-to-r from-purple-200"
           }`}
         >
-          {match.players?.blue?.map((allplayers) => {
+          {match?.players?.blue?.map((allplayers) => {
             ids++;
             const kd = allplayers.stats.kills - allplayers.stats.deaths;
             return (
@@ -76,13 +76,13 @@ const TeamBlueTable = () => {
                     <div className="flex-shrink-0 w-10 h-10">
                       <img
                         className="w-10 h-10 rounded-full"
-                        src={allplayers.assets.agent.small}
+                        src={allplayers?.assets.agent.small}
                         alt="admin dashboard ui"
                       />
                     </div>
                     <div className="ml-4">
                       <div className="text-sm font-medium leading-5 text-white-900">
-                        {allplayers.name} #{allplayers.tag}
+                        {allplayers?.name} #{allplayers?.tag}
                       </div>
                     </div>
                   </div>
@@ -92,7 +92,7 @@ const TeamBlueTable = () => {
                   <div className="flex justify-center items-center">
                     <img
                       className="w-10 h-10 rounded-full"
-                      src={`/assets/ranks/${allplayers.currenttier_patched}.webp`}
+                      src={`/assets/ranks/${allplayers?.currenttier_patched}.webp`}
                       alt="admin dashboard ui"
                     />
                   </div>
@@ -100,22 +100,22 @@ const TeamBlueTable = () => {
 
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-center border-gray-200">
                   <div className="text-md font-roboto font-bold leading-5 text-[#efefef]">
-                    {Math.round(allplayers.stats.score / match.rounds.length)}
+                    {Math.round(allplayers?.stats.score / match?.rounds.length)}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-center border-gray-200">
                   <div className="text-md font-roboto font-bold leading-5 text-[#efefef]">
-                    {allplayers.stats.kills}
+                    {allplayers?.stats.kills}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-center border-gray-200">
                   <div className="text-md font-roboto font-bold leading-5 text-[#efefef]">
-                    {allplayers.stats.deaths}
+                    {allplayers?.stats.deaths}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-center border-gray-200">
                   <div className="text-md font-roboto font-bold leading-5 text-[#efefef]">
-                    {allplayers.stats.assists}
+                    {allplayers?.stats.assists}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-center border-gray-200">
@@ -129,14 +129,14 @@ const TeamBlueTable = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-center border-gray-200">
                   <div className="text-md font-roboto font-bold leading-5 text-[#efefef]">
-                    {(allplayers.stats.kills / allplayers.stats.deaths).toFixed(
-                      2
-                    )}
+                    {(
+                      allplayers?.stats.kills / allplayers?.stats.deaths
+                    ).toFixed(2)}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b text-center border-gray-200">
                   <div className="text-md font-roboto font-bold leading-5 text-[#efefef]">
-                    {allplayers.stats.headshots}
+                    {allplayers?.stats.headshots}
                   </div>
                 </td>
               </tr>

@@ -8,7 +8,7 @@ const SingleMatchCard = () => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-col-3 lg:grid-cols-5 bg-[#1b2733]">
-        {matches.data?.map((match) => {
+        {matches?.data?.map((match) => {
           id++;
           const searchedPlayer = match?.players?.all_players.find(
             (player) => player.name === input
@@ -18,7 +18,7 @@ const SingleMatchCard = () => {
             <>
               <div
                 className={`flex flex-col justify-center items-center  w-full h-[100px] ${
-                  match.teams[searchedPlayer?.team?.toLowerCase()]?.has_won
+                  match?.teams[searchedPlayer?.team?.toLowerCase()]?.has_won
                     ? "bg-gradient-to-r from-green-200"
                     : "bg-gradient-to-r from-purple-200"
                 }`}
@@ -30,22 +30,22 @@ const SingleMatchCard = () => {
                 <div className="font-roboto text-xl mt-2">
                   <span
                     className={`font-roboto font-bold text-xl ${
-                      match.teams[searchedPlayer?.team?.toLowerCase()]?.has_won
+                      match?.teams[searchedPlayer?.team?.toLowerCase()]?.has_won
                         ? "text-white-900"
                         : "text-[#ef5351]"
                     }`}
                   >
-                    {match.teams.blue.rounds_won}
+                    {match?.teams.blue.rounds_won}
                   </span>{" "}
                   :{" "}
                   <span
                     className={`font-roboto font-bold text-xl ${
-                      match.teams[searchedPlayer?.team?.toLowerCase()]?.has_won
+                      match?.teams[searchedPlayer?.team?.toLowerCase()]?.has_won
                         ? "text-white-900"
                         : "text-red-700"
                     }`}
                   >
-                    {match.teams.red.rounds_won}
+                    {match?.teams.red.rounds_won}
                   </span>
                 </div>
               </div>
