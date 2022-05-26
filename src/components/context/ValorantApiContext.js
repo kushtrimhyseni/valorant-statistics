@@ -149,7 +149,7 @@ export const ValorantApiProvider = ({ children }) => {
         }
       });
 
-      setWeapon({ name: bestWeapon.name, image: bestWeapon.image });
+      setWeapon({ name: bestWeapon?.name, image: bestWeapon?.image });
     });
   };
   useEffect(() => {
