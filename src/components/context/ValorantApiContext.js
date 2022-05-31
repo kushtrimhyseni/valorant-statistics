@@ -16,9 +16,11 @@ export const ValorantApiProvider = ({ children }) => {
   const [weapon, setWeapon] = useState("");
 
   //Get player statistic from Valorant public API
-  const playerStatistics = async () => {
+  const playerStatistics = async (paramInput, paramTag) => {
     const response = await fetch(
-      `https://api.henrikdev.xyz/valorant/v1/account/${input}/${tag}`
+      `https://api.henrikdev.xyz/valorant/v1/account/${
+        paramInput ? paramInput : input
+      }/${paramTag ? paramTag : tag}`
     );
     const data = await response.json();
     if (data.status === 200) {
@@ -62,6 +64,7 @@ export const ValorantApiProvider = ({ children }) => {
     }
     const data = await response.json();
     setMatches(data);
+    console.log(data);
     setError("");
   };
 
@@ -91,12 +94,19 @@ export const ValorantApiProvider = ({ children }) => {
     const agentOccurrences = {};
     const weaponOccurences = {};
 
+    const params = new URL(window.location).searchParams;
+
+    const tag = params.get("tag");
+    const input = params.get("user");
+
     matches.forEach((match) => {
       const matchPlayer = match?.players.all_players.find((matchPlayer) => {
         return (
           matchPlayer?.name === input && matchPlayer.tag === tag.toUpperCase()
         );
       });
+
+      console.log(match);
 
       if (agentOccurrences.hasOwnProperty(matchPlayer?.character)) {
         agentOccurrences[matchPlayer?.character]++;
@@ -153,7 +163,9 @@ export const ValorantApiProvider = ({ children }) => {
     });
   };
   useEffect(() => {
+    console.log("Hello");
     if (matches) {
+      console.log(matches);
       getFavAgentAndWeapon(matches?.data);
     }
   }, [matches]);

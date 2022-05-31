@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const TeamRedTable = () => {
   const { id } = useParams();
@@ -79,11 +79,15 @@ const TeamRedTable = () => {
                         alt="admin dashboard ui"
                       />
                     </div>
-                    <div className="ml-4">
-                      <div className="text-sm font-medium leading-5 text-white-900">
-                        {allplayers.name} #{allplayers.tag}
+                    <Link
+                      to={`/user/?user=${allplayers?.name}&tag=${allplayers?.tag}`}
+                    >
+                      <div className="ml-4">
+                        <div className="text-sm font-medium leading-5 text-white-900">
+                          {allplayers.name} #{allplayers.tag}
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 </td>
 

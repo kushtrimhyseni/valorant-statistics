@@ -1,11 +1,17 @@
 import React, { useState, useContext } from "react";
+import { useSearchParams } from "react-router-dom";
 import ValorantApiContext from "./context/ValorantApiContext";
 const Modes = () => {
-  const { input, getMatches, tag } = useContext(ValorantApiContext);
+  const { getMatches } = useContext(ValorantApiContext);
   const [clicked, setClicked] = useState(false);
 
+  const [searchParams] = useSearchParams();
+
+  const tag = searchParams.get("tag");
+  const user = searchParams.get("user");
+
   const handleClick = (value) => {
-    getMatches("", { user: input, tag, filter: value });
+    getMatches("", { user, tag, filter: value });
     setClicked(value);
   };
   return (

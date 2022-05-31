@@ -2,7 +2,11 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import ValorantApiContext from "./context/ValorantApiContext";
 const SingleMatchCard = () => {
-  const { matches, input } = useContext(ValorantApiContext);
+  const { matches } = useContext(ValorantApiContext);
+
+  const params = new URL(window.location).searchParams;
+
+  const input = params.get("user");
 
   let id = 0;
   return (

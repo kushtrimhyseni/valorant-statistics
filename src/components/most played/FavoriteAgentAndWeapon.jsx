@@ -2,7 +2,9 @@ import React, { useContext } from "react";
 import ValorantApiContext from "../context/ValorantApiContext";
 
 const FavoriteAgent = () => {
-  const { agent, weapon } = useContext(ValorantApiContext);
+  const { agent, weapon, matches } = useContext(ValorantApiContext);
+
+  console.log(agent, weapon, matches);
 
   return (
     <div className="p-6 md:p-0 mt-2">
