@@ -64,7 +64,6 @@ export const ValorantApiProvider = ({ children }) => {
     }
     const data = await response.json();
     setMatches(data);
-    console.log(data);
     setError("");
   };
 
@@ -105,8 +104,6 @@ export const ValorantApiProvider = ({ children }) => {
           matchPlayer?.name === input && matchPlayer.tag === tag.toUpperCase()
         );
       });
-
-      console.log(match);
 
       if (agentOccurrences.hasOwnProperty(matchPlayer?.character)) {
         agentOccurrences[matchPlayer?.character]++;
@@ -163,9 +160,7 @@ export const ValorantApiProvider = ({ children }) => {
     });
   };
   useEffect(() => {
-    console.log("Hello");
     if (matches) {
-      console.log(matches);
       getFavAgentAndWeapon(matches?.data);
     }
   }, [matches]);

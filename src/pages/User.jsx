@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
 import InputHeader from "../components/input/InputHeader";
 import PersonalStats from "../components/PersonalStats";
@@ -6,7 +7,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import ValorantApiContext from "../components/context/ValorantApiContext";
 
 const User = () => {
-  const { playerStatistics, matches } = useContext(ValorantApiContext);
+  const { playerStatistics } = useContext(ValorantApiContext);
   const [searchParams] = useSearchParams();
 
   const user = searchParams.get("user");
@@ -19,7 +20,6 @@ const User = () => {
   useEffect(() => {
     if (user && tag) {
       getPlayerStatisics(user, tag);
-      console.log(matches);
     }
   }, [user, tag]);
 
