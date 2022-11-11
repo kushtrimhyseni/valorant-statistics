@@ -17,6 +17,7 @@ export const ValorantApiProvider = ({ children }) => {
 
   //Get player statistic from Valorant public API
   const playerStatistics = async (paramInput, paramTag) => {
+    setLoading(true);
     const response = await fetch(
       `https://api.henrikdev.xyz/valorant/v1/account/${
         paramInput ? paramInput : input
